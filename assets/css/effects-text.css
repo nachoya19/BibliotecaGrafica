@@ -1,0 +1,1288 @@
+/* ==========================================================================
+   Biblioteca de Estilo Gráfico — 20 Text Animation Effects (.fx-01 .. .fx-20)
+   Supports both dedicated full-stage showcase and compact .is-mini previews.
+   ========================================================================== */
+
+/* Global pause mechanism for continuous animations */
+.is-paused *,
+.is-paused *::before,
+.is-paused *::after {
+  animation-play-state: paused !important;
+}
+
+/* Shared sizing helper for mini previews inside catalog cards */
+.is-mini {
+  --fx-scale: 0.52;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* --------------------------------------------------------------------------
+   01. Typewriter
+   -------------------------------------------------------------------------- */
+.fx-01-wrap {
+  font-family: var(--font-mono);
+  font-size: clamp(1.35rem, 3.6vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.4em;
+  text-align: center;
+}
+
+.is-mini .fx-01-wrap {
+  font-size: 1.05rem;
+}
+
+.fx-01-cursor {
+  display: inline-block;
+  width: 0.12em;
+  height: 1.15em;
+  margin-left: 0.14em;
+  background: var(--accent-2);
+  border-radius: 2px;
+  vertical-align: middle;
+}
+
+.fx-01-cursor.is-blinking {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: fx-01-blink 1s steps(2, start) infinite;
+  }
+}
+
+@keyframes fx-01-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   02. Mask Rise (overflow: hidden + sibling-index stagger)
+   -------------------------------------------------------------------------- */
+.fx-02-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15em;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5.4vw, 4rem);
+  font-weight: 700;
+  line-height: 1.08;
+  text-align: center;
+}
+
+.is-mini .fx-02-stack {
+  font-size: 1.45rem;
+}
+
+.fx-02-line {
+  overflow: hidden;
+  display: block;
+}
+
+.fx-02-text {
+  --stagger-step: 0.11s;
+  display: block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fx-02-text {
+    animation: fx-02-rise 0.78s var(--ease-out-expo) both;
+    animation-delay: calc((var(--sibling-index, 1) - 1) * var(--stagger-step));
+  }
+
+  @supports (animation-delay: calc(sibling-index() * 0.1s)) {
+    .fx-02-line:nth-child(n) .fx-02-text {
+      /* sibling-index() applies when siblings share parent; lines are children */
+    }
+  }
+}
+
+/* Direct sibling variant for Mask Rise lines */
+.fx-02-stack[data-stagger] > .fx-02-line {
+  --stagger-step: 0.12s;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fx-02-stack[data-stagger] > .fx-02-line > .fx-02-text {
+    animation: fx-02-rise 0.8s var(--ease-out-expo) both;
+    animation-delay: inherit;
+  }
+
+  .fx-02-stack[data-stagger] > .fx-02-line {
+    animation-delay: calc((var(--sibling-index, 1) - 1) * 0.12s);
+  }
+
+  @supports (animation-delay: calc(sibling-index() * 0.1s)) {
+    .fx-02-stack[data-stagger] > .fx-02-line {
+      animation-delay: calc((sibling-index() - 1) * 0.12s);
+    }
+  }
+}
+
+@keyframes fx-02-rise {
+  from { transform: translateY(115%); }
+  to { transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
+   03. Scramble Decode
+   -------------------------------------------------------------------------- */
+.fx-03-text {
+  font-family: var(--font-mono);
+  font-size: clamp(1.45rem, 4.2vw, 3.1rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+}
+
+.fx-03-locked {
+  color: inherit;
+}
+
+.fx-03-glyph {
+  color: #22e564;
+}
+
+.stage-canvas[data-surface="light"] .fx-03-glyph,
+html[data-theme="light"] .effect-card__preview .fx-03-glyph {
+  color: #15803d;
+}
+
+.is-mini .fx-03-text {
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+}
+
+/* --------------------------------------------------------------------------
+   04. Gradient Flow (Continuous + slower under reduced motion)
+   -------------------------------------------------------------------------- */
+.fx-04-text {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 6vw, 4.5rem);
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: -0.03em;
+  background-image: linear-gradient(
+    110deg,
+    #7c5cff 0%,
+    #00e5ff 25%,
+    #ff2e93 50%,
+    #ffd166 75%,
+    #7c5cff 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: fx-04-flow 6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-04-text {
+    animation-duration: 36s;
+  }
+}
+
+.is-mini .fx-04-text {
+  font-size: 1.55rem;
+}
+
+@keyframes fx-04-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* --------------------------------------------------------------------------
+   05. Word Stagger
+   -------------------------------------------------------------------------- */
+.fx-05-sentence {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3em 0.34em;
+  max-width: 19ch;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4.5vw, 3.3rem);
+  font-weight: 700;
+  line-height: 1.18;
+  text-align: center;
+}
+
+.is-mini .fx-05-sentence {
+  font-size: 1.15rem;
+  max-width: 22ch;
+}
+
+.fx-05-word {
+  --stagger-step: 0.085s;
+  display: inline-block;
+}
+
+.fx-05-word:last-child {
+  padding: 0.06em 0.36em;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  color: #52a800;
+}
+
+.stage-canvas[data-surface="light"] .fx-05-word:last-child,
+html[data-theme="light"] .effect-card__preview .fx-05-word:last-child {
+  background: #000000;
+  border-color: #000000;
+  color: #a3ff12;
+}
+
+.is-mini .fx-05-word:last-child {
+  padding: 0.04em 0.28em;
+  border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fx-05-word {
+    animation: fx-05-in 0.65s var(--ease-out-expo) both;
+    animation-delay: calc((var(--sibling-index, 1) - 1) * var(--stagger-step));
+  }
+
+  @supports (animation-delay: calc(sibling-index() * 0.1s)) {
+    .fx-05-word {
+      animation-delay: calc((sibling-index() - 1) * var(--stagger-step));
+    }
+  }
+}
+
+@keyframes fx-05-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   06. Blur In
+   -------------------------------------------------------------------------- */
+.fx-06-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35em;
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 4.8vw, 3.6rem);
+  font-weight: 700;
+  text-align: center;
+}
+
+.is-mini .fx-06-group {
+  font-size: 1.25rem;
+}
+
+.fx-06-word {
+  --stagger-step: 0.12s;
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fx-06-word {
+    animation: fx-06-focus 0.9s var(--ease-out-expo) both;
+    animation-delay: calc((var(--sibling-index, 1) - 1) * var(--stagger-step));
+  }
+
+  @supports (animation-delay: calc(sibling-index() * 0.1s)) {
+    .fx-06-word {
+      animation-delay: calc((sibling-index() - 1) * var(--stagger-step));
+    }
+  }
+}
+
+@keyframes fx-06-focus {
+  from {
+    opacity: 0;
+    filter: blur(18px);
+    transform: scale(1.08);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   07. Letter Bounce (linear() spring on transform, ease-out on opacity)
+   -------------------------------------------------------------------------- */
+.fx-07-word {
+  display: inline-flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6.8vw, 5rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.is-mini .fx-07-word {
+  font-size: 1.75rem;
+}
+
+.fx-07-char {
+  --stagger-step: 0.055s;
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fx-07-char {
+    animation-name: fx-07-bounce-y, fx-07-fade;
+    animation-duration: 1.05s, 0.28s;
+    animation-timing-function: var(--ease-spring-fallback), ease-out;
+    animation-fill-mode: both, both;
+    animation-delay: calc((var(--sibling-index, 1) - 1) * var(--stagger-step));
+  }
+
+  @supports (animation-timing-function: linear(0, 1)) {
+    .fx-07-char {
+      animation-timing-function: var(--spring-easing), ease-out;
+    }
+  }
+
+  @supports (animation-delay: calc(sibling-index() * 0.1s)) {
+    .fx-07-char {
+      animation-delay: calc((sibling-index() - 1) * var(--stagger-step));
+    }
+  }
+}
+
+@keyframes fx-07-bounce-y {
+  from { transform: translateY(-56px); }
+  to { transform: translateY(0); }
+}
+
+@keyframes fx-07-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* --------------------------------------------------------------------------
+   08. Marker Highlight
+   -------------------------------------------------------------------------- */
+.fx-08-sentence {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.8vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.38;
+  max-width: 24ch;
+  text-align: center;
+}
+
+.is-mini .fx-08-sentence {
+  font-size: 1.1rem;
+  max-width: 22ch;
+}
+
+.fx-08-mark {
+  position: relative;
+  display: inline-block;
+  background: transparent;
+  color: var(--highlight-ink);
+  padding: 0 0.24em;
+  border-radius: 6px;
+  isolation: isolate;
+}
+
+.fx-08-mark::before {
+  content: "";
+  position: absolute;
+  inset: 0.08em -0.04em 0.04em;
+  background: var(--highlight-fluo);
+  border-radius: 6px;
+  z-index: -1;
+  transform-origin: left center;
+  transform: rotate(-1.2deg) scaleX(1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fx-08-mark::before {
+    animation: fx-08-swipe 0.72s var(--ease-out-expo) both;
+    animation-delay: var(--mark-delay, 0.15s);
+  }
+}
+
+@keyframes fx-08-swipe {
+  from { transform: rotate(-1.2deg) scaleX(0); }
+  to { transform: rotate(-1.2deg) scaleX(1); }
+}
+
+/* --------------------------------------------------------------------------
+   09. Number Count-up
+   -------------------------------------------------------------------------- */
+.fx-09-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(140px, 1fr));
+  gap: 1rem;
+  width: min(100%, 660px);
+}
+
+.is-mini .fx-09-grid {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.45rem;
+}
+
+.fx-09-kpi {
+  padding: 1.15rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--stage-border, var(--border));
+  background: var(--stage-card-bg, var(--bg-surface));
+  text-align: center;
+}
+
+.is-mini .fx-09-kpi {
+  padding: 0.55rem 0.35rem;
+}
+
+.fx-09-val {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.6vw, 2.45rem);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-2);
+  line-height: 1.1;
+}
+
+.is-mini .fx-09-val {
+  font-size: 0.98rem;
+}
+
+.fx-09-label {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--stage-muted, var(--text-muted));
+}
+
+.is-mini .fx-09-label {
+  font-size: 0.65rem;
+}
+
+@media (max-width: 560px) {
+  .fx-09-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   10. Rotating Word (3D Vertical Carousel)
+   -------------------------------------------------------------------------- */
+.fx-10-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.38em;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4.5vw, 3.35rem);
+  font-weight: 700;
+  text-align: center;
+}
+
+.is-mini .fx-10-line {
+  font-size: 1.15rem;
+}
+
+.fx-10-viewport {
+  position: relative;
+  display: inline-grid;
+  place-items: center start;
+  height: 1.3em;
+  min-width: 7.4ch;
+  perspective: 800px;
+  overflow: hidden;
+}
+
+.fx-10-word {
+  grid-area: 1 / 1;
+  color: var(--accent-2);
+  transform-origin: center center -22px;
+  backface-visibility: hidden;
+  opacity: 0;
+  transform: rotateX(85deg) translateY(25%);
+  transition: transform 0.55s var(--ease-out-expo), opacity 0.4s ease;
+}
+
+.fx-10-word.is-active {
+  opacity: 1;
+  transform: rotateX(0deg) translateY(0);
+}
+
+.fx-10-word.is-exiting {
+  opacity: 0;
+  transform: rotateX(-85deg) translateY(-25%);
+}
+
+/* --------------------------------------------------------------------------
+   11. Tracking Expand
+   -------------------------------------------------------------------------- */
+.fx-11-text {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.28em;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4.8vw, 3.6rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+}
+
+.fx-11-text::after {
+  content: "";
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  bottom: 0;
+  height: 3px;
+  border-radius: 999px;
+  background: #b7ff2a;
+  transform-origin: center;
+  transform: scaleX(1);
+}
+
+.is-mini .fx-11-text {
+  font-size: 1.05rem;
+  letter-spacing: 0.22em;
+  text-indent: 0.22em;
+}
+
+.is-mini .fx-11-text::after {
+  height: 2px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fx-11-text {
+    animation: fx-11-expand 1.35s var(--ease-out-expo) both;
+  }
+
+  .fx-11-text::after {
+    animation: fx-11-line 1.35s var(--ease-out-expo) both;
+  }
+}
+
+@keyframes fx-11-expand {
+  from {
+    opacity: 0;
+    letter-spacing: -0.06em;
+    text-indent: -0.06em;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    letter-spacing: 0.3em;
+    text-indent: 0.3em;
+    transform: scale(1);
+  }
+}
+
+@keyframes fx-11-line {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+.is-mini .fx-11-text {
+  @media (prefers-reduced-motion: no-preference) {
+    animation-name: fx-11-expand-mini;
+  }
+}
+
+@keyframes fx-11-expand-mini {
+  from {
+    opacity: 0;
+    letter-spacing: -0.04em;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    letter-spacing: 0.22em;
+    transform: scale(1);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   12. Outline to Fill
+   -------------------------------------------------------------------------- */
+.fx-12-text {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 7vw, 5.2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--stage-ink, var(--text));
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 2px var(--stage-ink, var(--text));
+  user-select: none;
+}
+
+.is-mini .fx-12-text {
+  font-size: 1.7rem;
+  -webkit-text-stroke: 1.4px var(--stage-ink, var(--text));
+}
+
+.fx-12-text::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: var(--stage-ink, var(--text));
+  -webkit-text-fill-color: var(--stage-ink, var(--text));
+  -webkit-text-stroke: 0;
+  clip-path: inset(0 0 0 0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fx-12-text::before {
+    animation: fx-12-fill 3.2s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+  }
+}
+
+@keyframes fx-12-fill {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+/* --------------------------------------------------------------------------
+   13. RGB Glitch (Constant fast chromatic split)
+   -------------------------------------------------------------------------- */
+.fx-13-glitch {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 7vw, 5rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.is-mini .fx-13-glitch {
+  font-size: 1.65rem;
+}
+
+.fx-13-glitch::before,
+.fx-13-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.fx-13-glitch::before {
+  color: #00f5ff;
+  transform: translate(-3px, 0);
+  mix-blend-mode: screen;
+}
+
+.fx-13-glitch::after {
+  color: #ff2a6d;
+  transform: translate(3px, 0);
+  mix-blend-mode: screen;
+}
+
+.stage-canvas[data-surface="light"] .fx-13-glitch::before,
+.stage-canvas[data-surface="light"] .fx-13-glitch::after,
+html[data-theme="light"] .effect-card__preview .fx-13-glitch::before,
+html[data-theme="light"] .effect-card__preview .fx-13-glitch::after {
+  mix-blend-mode: multiply;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fx-13-glitch::before {
+    animation: fx-13-cyan 0.55s steps(1, end) infinite;
+  }
+
+  .fx-13-glitch::after {
+    animation: fx-13-red 0.62s steps(1, end) infinite;
+  }
+}
+
+@keyframes fx-13-cyan {
+  0% {
+    clip-path: inset(8% 0 70% 0);
+    transform: translate(-5px, -1px);
+  }
+  16% {
+    clip-path: inset(48% 0 24% 0);
+    transform: translate(4px, 1px);
+  }
+  33% {
+    clip-path: inset(18% 0 54% 0);
+    transform: translate(-6px, 0);
+  }
+  50% {
+    clip-path: inset(68% 0 8% 0);
+    transform: translate(5px, -1px);
+  }
+  66% {
+    clip-path: inset(28% 0 42% 0);
+    transform: translate(-4px, 1px);
+  }
+  83% {
+    clip-path: inset(56% 0 16% 0);
+    transform: translate(3px, -1px);
+  }
+  100% {
+    clip-path: inset(4% 0 64% 0);
+    transform: translate(-5px, 1px);
+  }
+}
+
+@keyframes fx-13-red {
+  0% {
+    clip-path: inset(62% 0 10% 0);
+    transform: translate(5px, 1px);
+  }
+  16% {
+    clip-path: inset(14% 0 60% 0);
+    transform: translate(-4px, -1px);
+  }
+  33% {
+    clip-path: inset(40% 0 32% 0);
+    transform: translate(6px, 0);
+  }
+  50% {
+    clip-path: inset(6% 0 68% 0);
+    transform: translate(-5px, 1px);
+  }
+  66% {
+    clip-path: inset(52% 0 20% 0);
+    transform: translate(4px, -1px);
+  }
+  83% {
+    clip-path: inset(24% 0 48% 0);
+    transform: translate(-3px, 1px);
+  }
+  100% {
+    clip-path: inset(70% 0 6% 0);
+    transform: translate(5px, -1px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   14. Wave (Continuous sinusoidal oscillation with sibling-index)
+   -------------------------------------------------------------------------- */
+.fx-14-wave {
+  display: inline-flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 6vw, 4.4rem);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.is-mini .fx-14-wave {
+  font-size: 1.5rem;
+}
+
+.fx-14-char {
+  --stagger-step: -0.14s;
+  display: inline-block;
+  min-width: 0.25em;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fx-14-char {
+    animation: fx-14-bob 1.8s ease-in-out infinite;
+    animation-delay: calc((var(--sibling-index, 1) - 1) * var(--stagger-step));
+  }
+
+  @supports (animation-delay: calc(sibling-index() * 0.1s)) {
+    .fx-14-char {
+      animation-delay: calc((sibling-index() - 1) * var(--stagger-step));
+    }
+  }
+}
+
+@keyframes fx-14-bob {
+  0%, 100% { transform: translateY(6px); }
+  50% { transform: translateY(-14px); }
+}
+
+/* --------------------------------------------------------------------------
+   15. Letter Flip (3D rotateY cascade with active glow)
+   -------------------------------------------------------------------------- */
+.fx-15-word {
+  display: inline-flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  perspective: 900px;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5.8vw, 4.3rem);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.is-mini .fx-15-word {
+  font-size: 1.38rem;
+}
+
+.fx-15-char {
+  --stagger-step: 0.075s;
+  display: inline-block;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fx-15-char {
+    animation: fx-15-flip 0.85s var(--ease-out-expo) both;
+    animation-delay: calc((var(--sibling-index, 1) - 1) * var(--stagger-step));
+  }
+
+  @supports (animation-delay: calc(sibling-index() * 0.1s)) {
+    .fx-15-char {
+      animation-delay: calc((sibling-index() - 1) * var(--stagger-step));
+    }
+  }
+}
+
+@keyframes fx-15-flip {
+  0% {
+    opacity: 0;
+    transform: rotateY(-90deg);
+    color: var(--accent-2);
+    text-shadow: 0 0 0 transparent;
+  }
+  45% {
+    opacity: 1;
+    color: var(--accent-2);
+    text-shadow: 0 0 20px var(--accent-2), 0 0 38px rgba(0, 229, 255, 0.7);
+  }
+  75% {
+    color: var(--accent-2);
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.35);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateY(0deg);
+    color: inherit;
+    text-shadow: 0 0 0 transparent;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   16. Squiggle Underline
+   -------------------------------------------------------------------------- */
+.fx-16-phrase {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4.6vw, 3.4rem);
+  font-weight: 700;
+  text-align: center;
+}
+
+.is-mini .fx-16-phrase {
+  font-size: 1.18rem;
+}
+
+.fx-16-target {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.22em;
+}
+
+.fx-16-svg {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0.34em;
+  overflow: visible;
+}
+
+.fx-16-path {
+  fill: none;
+  stroke: var(--accent-3);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 420;
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fx-16-path {
+    animation:
+      fx-16-draw 3.2s cubic-bezier(0.22, 1, 0.36, 1) both,
+      fx-16-ripple 7.5s ease-in-out 3.2s infinite alternate;
+  }
+}
+
+@keyframes fx-16-draw {
+  from { stroke-dashoffset: 420; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes fx-16-ripple {
+  from { transform: translateX(0); }
+  to { transform: translateX(-10px); }
+}
+
+/* --------------------------------------------------------------------------
+   17. 3D Extrude (20-layer deep volumetric shadow)
+   -------------------------------------------------------------------------- */
+.fx-17-text {
+  --ex-x: 1.5px;
+  --ex-y: 1.5px;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 7.2vw, 5.4rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #f8fafc;
+  transition: transform 0.25s var(--ease-out-expo), text-shadow 0.25s var(--ease-out-expo);
+  text-shadow:
+    calc(var(--ex-x) * 1) calc(var(--ex-y) * 1) 0 #7c5cff,
+    calc(var(--ex-x) * 2) calc(var(--ex-y) * 2) 0 #7354f2,
+    calc(var(--ex-x) * 3) calc(var(--ex-y) * 3) 0 #6b4ce6,
+    calc(var(--ex-x) * 4) calc(var(--ex-y) * 4) 0 #6245d9,
+    calc(var(--ex-x) * 5) calc(var(--ex-y) * 5) 0 #5a3ecd,
+    calc(var(--ex-x) * 6) calc(var(--ex-y) * 6) 0 #5237c0,
+    calc(var(--ex-x) * 7) calc(var(--ex-y) * 7) 0 #4a30b4,
+    calc(var(--ex-x) * 8) calc(var(--ex-y) * 8) 0 #422aa7,
+    calc(var(--ex-x) * 9) calc(var(--ex-y) * 9) 0 #3b249b,
+    calc(var(--ex-x) * 10) calc(var(--ex-y) * 10) 0 #341f8e,
+    calc(var(--ex-x) * 11) calc(var(--ex-y) * 11) 0 #2d1a82,
+    calc(var(--ex-x) * 12) calc(var(--ex-y) * 12) 0 #271575,
+    calc(var(--ex-x) * 13) calc(var(--ex-y) * 13) 0 #211169,
+    calc(var(--ex-x) * 14) calc(var(--ex-y) * 14) 0 #1c0e5c,
+    calc(var(--ex-x) * 15) calc(var(--ex-y) * 15) 0 #170b50,
+    calc(var(--ex-x) * 16) calc(var(--ex-y) * 16) 0 #130945,
+    calc(var(--ex-x) * 17) calc(var(--ex-y) * 17) 0 #10073b,
+    calc(var(--ex-x) * 18) calc(var(--ex-y) * 18) 0 #0e0634,
+    calc(var(--ex-x) * 19) calc(var(--ex-y) * 19) 0 #0d0630,
+    calc(var(--ex-x) * 20) calc(var(--ex-y) * 20) 0 #0b0528,
+    calc(var(--ex-x) * 22) calc(var(--ex-y) * 22) 26px rgba(0, 0, 0, 0.55);
+  transform: translate(-14px, -14px);
+}
+
+.stage-canvas[data-surface="light"] .fx-17-text {
+  color: #15192a;
+}
+
+.is-mini .fx-17-text {
+  --ex-x: 0.75px;
+  --ex-y: 0.75px;
+  font-size: 1.85rem;
+  transform: translate(-6px, -6px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fx-17-text {
+    animation: fx-17-pop 0.95s var(--ease-out-expo) both;
+  }
+}
+
+@keyframes fx-17-pop {
+  from {
+    opacity: 0;
+    transform: translate(0, 0);
+    text-shadow: 0 0 0 #7c5cff;
+  }
+  to {
+    opacity: 1;
+    transform: translate(-14px, -14px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   18. Zoom Punch (Impact + concentric shockwave rings)
+   -------------------------------------------------------------------------- */
+.fx-18-wrap {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+}
+
+.fx-18-text {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 7vw, 5.2rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 2;
+}
+
+.is-mini .fx-18-text {
+  font-size: 1.75rem;
+}
+
+.fx-18-ring {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-2);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fx-18-ring--two {
+  border-color: var(--accent-3);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fx-18-text {
+    animation-name: fx-18-slam, fx-18-fade;
+    animation-duration: 0.9s, 0.25s;
+    animation-timing-function: var(--ease-spring-fallback), ease-out;
+    animation-fill-mode: both, both;
+  }
+
+  @supports (animation-timing-function: linear(0, 1)) {
+    .fx-18-text {
+      animation-timing-function: var(--spring-easing), ease-out;
+    }
+  }
+
+  .fx-18-ring--one {
+    animation: fx-18-wave 0.85s var(--ease-out-expo) 0.14s both;
+  }
+
+  .fx-18-ring--two {
+    animation: fx-18-wave 1.05s var(--ease-out-expo) 0.24s both;
+  }
+}
+
+@keyframes fx-18-slam {
+  from { transform: scale(2.15); }
+  to { transform: scale(1); }
+}
+
+@keyframes fx-18-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fx-18-wave {
+  0% {
+    opacity: 0.85;
+    transform: scale(0.4);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3.1);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   19. Strike & Replace
+   -------------------------------------------------------------------------- */
+.fx-19-offer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-family: var(--font-display);
+}
+
+.is-mini .fx-19-offer {
+  gap: 0.2rem;
+}
+
+.fx-19-old {
+  position: relative;
+  font-size: clamp(1.5rem, 3.8vw, 2.5rem);
+  font-weight: 600;
+  color: var(--stage-muted, var(--text-muted));
+  opacity: 0.6;
+}
+
+.is-mini .fx-19-old {
+  font-size: 1rem;
+}
+
+.fx-19-old::after {
+  content: "";
+  position: absolute;
+  left: -4%;
+  right: -4%;
+  top: 52%;
+  height: 3.5px;
+  border-radius: 99px;
+  background: var(--danger);
+  transform-origin: left center;
+  transform: rotate(-4deg) scaleX(1);
+}
+
+.fx-19-new {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: clamp(2rem, 5.2vw, 3.6rem);
+  font-weight: 800;
+  color: var(--success);
+}
+
+.is-mini .fx-19-new {
+  font-size: 1.35rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fx-19-old {
+    animation: fx-19-dim 0.5s ease 0.35s both;
+  }
+
+  .fx-19-old::after {
+    animation: fx-19-slash 0.48s var(--ease-out-expo) 0.2s both;
+  }
+
+  .fx-19-new {
+    animation: fx-19-pop 0.65s var(--ease-spring-fallback) 0.55s both;
+  }
+}
+
+@keyframes fx-19-slash {
+  from { transform: rotate(-4deg) scaleX(0); }
+  to { transform: rotate(-4deg) scaleX(1); }
+}
+
+@keyframes fx-19-dim {
+  from { opacity: 1; }
+  to { opacity: 0.55; }
+}
+
+@keyframes fx-19-pop {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   20. Split Halves
+   -------------------------------------------------------------------------- */
+.fx-20-box {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  padding: 1.6rem 1.2rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  user-select: none;
+}
+
+.is-mini .fx-20-box {
+  padding: 0.9rem 0.5rem;
+}
+
+.fx-20-main {
+  grid-area: 1 / 1;
+  font-family: var(--font-display);
+  font-size: clamp(2.35rem, 6.8vw, 5rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  transition: transform 1.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.is-mini .fx-20-main {
+  font-size: 1.65rem;
+}
+
+.fx-20-main--top {
+  clip-path: inset(0 0 50% 0);
+}
+
+.fx-20-main--bottom {
+  clip-path: inset(50% 0 0 0);
+}
+
+.fx-20-secret {
+  grid-area: 1 / 1;
+  font-family: var(--font-mono);
+  font-size: clamp(0.85rem, 2vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 1.15s ease 0.25s, transform 1.3s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+}
+
+.is-mini .fx-20-secret {
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+}
+
+.fx-20-box.is-open .fx-20-main--top,
+.fx-20-box:hover .fx-20-main--top {
+  transform: translateY(-54%);
+}
+
+.fx-20-box.is-open .fx-20-main--bottom,
+.fx-20-box:hover .fx-20-main--bottom {
+  transform: translateY(54%);
+}
+
+.fx-20-box.is-open .fx-20-secret,
+.fx-20-box:hover .fx-20-secret {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* --------------------------------------------------------------------------
+   21. Circular Text
+   -------------------------------------------------------------------------- */
+.fx-21-wrap {
+  display: grid;
+  place-items: center;
+}
+
+.fx-21-svg {
+  width: clamp(210px, 34vw, 290px);
+  height: clamp(210px, 34vw, 290px);
+  overflow: visible;
+}
+
+.is-mini .fx-21-svg {
+  width: 122px;
+  height: 122px;
+}
+
+.fx-21-text {
+  fill: currentColor;
+  font-family: var(--font-display);
+  font-size: 16.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fx-21-svg {
+    animation: fx-21-spin 22s linear infinite;
+  }
+}
+
+@keyframes fx-21-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
