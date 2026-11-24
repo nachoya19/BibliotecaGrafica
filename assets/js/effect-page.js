@@ -317,6 +317,105 @@
     };
   }
 
+  function setupSkeuomorphism(stage) {
+    var pushBtn = stage.querySelector('[data-skeuo-push]');
+    var switchBtn = stage.querySelector('[data-skeuo-switch]');
+    var fader = stage.querySelector('[data-skeuo-fader]');
+    var knob = stage.querySelector('[data-skeuo-knob]');
+    var readout = stage.querySelector('[data-skeuo-readout]');
+
+    if (pushBtn) {
+      pushBtn.addEventListener('click', function () {
+        var active = pushBtn.classList.toggle('is-on');
+        if (readout) readout.textContent = active ? 'ON · ' + (fader ? fader.value : '72') + '%' : 'STANDBY';
+      });
+    }
+
+    if (switchBtn) {
+      switchBtn.addEventListener('click', function () {
+        switchBtn.classList.toggle('is-on');
+      });
+    }
+
+    if (fader) {
+      var syncDial = function () {
+        var val = Number(fader.value || 0);
+        if (knob) {
+          var deg = -135 + (val / 100) * 270;
+          knob.style.setProperty('--dial-deg', deg.toFixed(1) + 'deg');
+        }
+        if (readout && (!pushBtn || pushBtn.classList.contains('is-on'))) {
+          readout.textContent = 'ON · ' + val + '%';
+        }
+      };
+      fader.addEventListener('input', syncDial);
+      syncDial();
+    }
+
+    return null;
+  }
+
+  function setupAurora(stage) {
+    var box = stage.querySelector('[data-aurora-box]');
+    var toggleBtn = stage.querySelector('[data-aurora-toggle]');
+    if (!box || !toggleBtn) return null;
+
+    toggleBtn.addEventListener('click', function () {
+      var hidden = box.classList.toggle('is-text-hidden');
+      toggleBtn.textContent = hidden ? 'Mostrar texto' : 'Ocultar texto';
+    });
+
+    return null;
+  }
+
+  function setupGrain(stage) {
+    var box = stage.querySelector('[data-grain-box]');
+    var slider = stage.querySelector('[data-grain-slider]');
+    var valueEl = stage.querySelector('[data-grain-value]');
+    var paletteBtns = stage.querySelectorAll('[data-grain-palette]');
+    if (!box) return null;
+
+    if (slider) {
+      var syncGrain = function () {
+        var pct = Number(slider.value || 0);
+        box.style.setProperty('--grain-opacity', (pct / 100).toFixed(2));
+        if (valueEl) valueEl.textContent = pct + '%';
+      };
+      slider.addEventListener('input', syncGrain);
+      syncGrain();
+    }
+
+    paletteBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var palette = btn.getAttribute('data-grain-palette');
+        box.setAttribute('data-palette', palette);
+        paletteBtns.forEach(function (b) {
+          b.classList.toggle('is-active', b === btn);
+        });
+      });
+    });
+
+    return null;
+  }
+
+  function setupGraffitiVivo(stage) {
+    if (!stage) return null;
+
+    stage.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-graff-theme-btn]');
+      if (!btn) return;
+      var box = stage.querySelector('[data-graff-box]');
+      if (!box) return;
+      var theme = btn.getAttribute('data-graff-theme-btn');
+      box.setAttribute('data-graff-theme', theme);
+      stage.querySelectorAll('[data-graff-theme-btn]').forEach(function (b) {
+        b.classList.toggle('is-active', b === btn);
+      });
+    });
+
+    return null;
+  }
+
   function initEffectEngine(effectId, stage) {
     applySiblingFallback(stage);
     if (effectId === '01-typewriter') return setupTypewriter(stage);
@@ -325,6 +424,10 @@
     if (effectId === '10-rotating-word') return setupRotatingWord(stage);
     if (effectId === '17-3d-extrude') return setupExtrudePointer(stage);
     if (effectId === '20-split-halves') return setupSplitHalves(stage);
+    if (effectId === 'estilo-03-skeuomorphism') return setupSkeuomorphism(stage);
+    if (effectId === 'estilo-04-aurora') return setupAurora(stage);
+    if (effectId === 'estilo-05-grain') return setupGrain(stage);
+    if (effectId === 'estilo-08-graffiti-vivo') return setupGraffitiVivo(stage);
     return null;
   }
 
@@ -392,26 +495,35 @@
   }
 
   function setupPager(fxIndex) {
-    var effects = data.effects;
+    var currentFx = data.effects[fxIndex];
+    var categoryEffects = data.effects.filter(function (item) {
+      return item.category === currentFx.category;
+    });
+    var catIndex = categoryEffects.findIndex(function (item) {
+      return item.id === currentFx.id;
+    });
+
     var prevEl = document.getElementById('pager-prev');
     var nextEl = document.getElementById('pager-next');
     var counterEl = document.getElementById('effect-counter');
 
     if (counterEl) {
-      counterEl.textContent = effects[fxIndex].number + ' / ' + String(effects.length).padStart(2, '0');
+      counterEl.textContent =
+        currentFx.number + ' / ' + String(categoryEffects.length).padStart(2, '0');
     }
 
-    var prevFx = effects[(fxIndex - 1 + effects.length) % effects.length];
-    var nextFx = effects[(fxIndex + 1) % effects.length];
+    var prevFx =
+      categoryEffects[(catIndex - 1 + categoryEffects.length) % categoryEffects.length];
+    var nextFx = categoryEffects[(catIndex + 1) % categoryEffects.length];
 
     if (prevEl && prevFx) {
-      prevEl.href = prevFx.slug + '.html';
+      prevEl.href = '../../' + prevFx.path;
       var prevTitle = prevEl.querySelector('.pager-link__title');
       if (prevTitle) prevTitle.textContent = prevFx.number + '. ' + prevFx.name;
     }
 
     if (nextEl && nextFx) {
-      nextEl.href = nextFx.slug + '.html';
+      nextEl.href = '../../' + nextFx.path;
       var nextTitle = nextEl.querySelector('.pager-link__title');
       if (nextTitle) nextTitle.textContent = nextFx.number + '. ' + nextFx.name;
     }

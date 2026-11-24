@@ -6,6 +6,11 @@
       id: 'animaciones-texto',
       name: 'Animaciones de Texto',
       description: 'Tipografía cinética, revelados, física de resortes y efectos cromáticos para titulares e interfaces.'
+    },
+    {
+      id: 'estilos-web',
+      name: 'Estilos Web',
+      description: 'Sistemas visuales, texturas, fondos atmosféricos e ilustraciones para definir la personalidad de una web.'
     }
   ];
 
@@ -423,6 +428,174 @@
         html: '<svg class="fx-21-svg" viewBox="0 0 260 260" role="img" aria-label="Diseño en movimiento">\n  <defs>\n    <path id="fx-21-circle-path" d="M 130, 130 m -92, 0 a 92,92 0 1,1 184,0 a 92,92 0 1,1 -184,0"/>\n  </defs>\n  <text class="fx-21-text">\n    <textPath href="#fx-21-circle-path" startOffset="0%" textLength="562">DISEÑO EN MOVIMIENTO • BIBLIOTECA GRÁFICA • </textPath>\n  </text>\n</svg>',
         css: '@media (prefers-reduced-motion: no-preference) {\n  .fx-21-svg { animation: fx-21-spin 22s linear infinite; }\n}\n@keyframes fx-21-spin {\n  from { transform: rotate(0deg); }\n  to { transform: rotate(360deg); }\n}',
         js: '// Efecto 100% CSS + SVG.'
+      }
+    },
+    {
+      number: '01',
+      id: 'estilo-01-claymorphism',
+      slug: '01-claymorphism',
+      category: 'estilos-web',
+      modeLabel: 'Estilo UI',
+      name: 'Claymorphism',
+      description: 'Tarjetas y botones inflados en 3D suave con doble sombra interior.',
+      tags: ['CSS', 'Sombras 3D', 'UI Pastel'],
+      continuous: false,
+      replayable: false,
+      path: 'efectos/estilos-web/01-claymorphism.html',
+      hint: 'Volumen tipo arcilla combinando sombra difusa exterior y dos inset-shadows opuestas.',
+      previewHtml:
+        '<div class="st-01-board"><div class="st-01-card"><div class="st-01-top"><span class="st-01-badge-icon">✦</span><div><div class="st-01-title">Tarjeta Clay</div></div></div><div class="st-01-track"><span class="st-01-fill"></span></div></div><div class="st-01-actions"><span class="st-01-btn st-01-btn--lilac">Acción</span><span class="st-01-btn st-01-btn--coral">Guardar</span><span class="st-01-btn st-01-btn--mint">Listo</span></div></div>',
+      code: {
+        html: '<div class="st-01-card">\n  <h3>Tarjeta Claymorphism</h3>\n  <button class="st-01-btn st-01-btn--lilac">Explorar</button>\n</div>',
+        css: '.st-01-card {\n  border-radius: 30px;\n  background: linear-gradient(145deg, #ffffff, #eef0ff);\n  box-shadow:\n    18px 22px 38px rgba(102, 86, 178, 0.22),\n    inset 8px 8px 16px rgba(255, 255, 255, 0.9),\n    inset -10px -10px 20px rgba(124, 110, 185, 0.24);\n}',
+        js: '// Estilo 100% CSS con feedback táctil :hover y :active.'
+      }
+    },
+    {
+      number: '02',
+      id: 'estilo-02-brutalismo',
+      slug: '02-brutalismo',
+      category: 'estilos-web',
+      modeLabel: 'Landing',
+      name: 'Brutalismo',
+      description: 'Landing estilo brutalista con bordes negros, contraste crudo y sombras sólidas.',
+      tags: ['CSS', 'Landing', 'Neo-Brutalismo'],
+      continuous: false,
+      replayable: false,
+      path: 'efectos/estilos-web/02-brutalismo.html',
+      hint: 'Bordes gruesos sin radio, tipografía contundente y sombras desplazadas de desenfoque 0px.',
+      previewHtml:
+        '<div class="st-02-landing"><div class="st-02-nav"><span>BRUTAL.STUDIO</span><span>MENU</span></div><div class="st-02-hero"><div><span class="st-02-sticker">RAW 2026</span><div class="st-02-headline">DISEÑO SIN FILTROS.</div><span class="st-02-cta">ENTRAR →</span></div></div></div>',
+      code: {
+        html: '<section class="st-02-landing">\n  <nav class="st-02-nav"><span>BRUTAL.STUDIO</span><span>01 / RAW</span></nav>\n  <div class="st-02-hero">\n    <h2 class="st-02-headline">DISEÑO SIN FILTROS.</h2>\n    <button class="st-02-cta">LANZAR PROYECTO →</button>\n  </div>\n</section>',
+        css: '.st-02-landing {\n  background: #f6f2e6;\n  border: 3px solid #111111;\n  box-shadow: 8px 8px 0 #111111;\n}\n.st-02-cta:active {\n  transform: translate(5px, 5px);\n  box-shadow: 0 0 0 #111111;\n}',
+        js: '// Estilo 100% CSS.'
+      }
+    },
+    {
+      number: '03',
+      id: 'estilo-03-skeuomorphism',
+      slug: '03-skeuomorphism',
+      category: 'estilos-web',
+      modeLabel: 'Controles',
+      name: 'Skeuomorphism',
+      description: 'Controles físicos realistas con biseles metálicos, LEDs y relieve táctil.',
+      tags: ['CSS', 'JS', 'Hardware UI'],
+      continuous: false,
+      replayable: false,
+      path: 'efectos/estilos-web/03-skeuomorphism.html',
+      hint: 'Prueba a pulsar el botón metálico, alternar el interruptor y deslizar el fader.',
+      previewHtml:
+        '<div class="st-03-console"><div class="st-03-header"><span>SYNTH PANEL</span><span class="st-03-readout">ON · 72%</span></div><div class="st-03-controls"><div class="st-03-slot"><span class="st-03-push is-on"><span class="st-03-led"></span>PWR</span></div><div class="st-03-slot"><span class="st-03-switch is-on"><span class="st-03-thumb"></span></span></div><div class="st-03-slot"><span class="st-03-knob"></span></div></div></div>',
+      code: {
+        html: '<div class="st-03-console">\n  <button type="button" class="st-03-push is-on" data-skeuo-push><span class="st-03-led"></span>POWER</button>\n  <button type="button" class="st-03-switch is-on" data-skeuo-switch><span class="st-03-thumb"></span></button>\n  <input type="range" min="0" max="100" value="72" class="st-03-fader" data-skeuo-fader>\n</div>',
+        css: '.st-03-push {\n  background: linear-gradient(180deg, #525866 0%, #353a45 100%);\n  box-shadow: 0 5px 0 #181b22, 0 8px 14px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.34);\n}',
+        js: '// Sincroniza el fader con el ángulo --dial-deg del dial rotatorio y la pantalla LED.'
+      }
+    },
+    {
+      number: '04',
+      id: 'estilo-04-aurora',
+      slug: '04-aurora',
+      category: 'estilos-web',
+      modeLabel: 'Fondo vivo',
+      name: 'Aurora',
+      description: 'Fondo aurora atmosférico en verde esmeralda y violeta en movimiento orgánico.',
+      tags: ['CSS', 'Gradiente', 'Atmosférico'],
+      continuous: true,
+      replayable: false,
+      path: 'efectos/estilos-web/04-aurora.html',
+      hint: 'Nebulosas difuminadas en verde y violeta con blend screen; puedes pausar u ocultar el texto.',
+      previewHtml:
+        '<div class="st-04-aurora"><div class="st-04-blobs"><span class="st-04-blob st-04-blob--green-a"></span><span class="st-04-blob st-04-blob--violet-a"></span><span class="st-04-blob st-04-blob--green-b"></span></div><div class="st-04-content"><div class="st-04-title">AURORA</div></div></div>',
+      code: {
+        html: '<div class="st-04-aurora">\n  <div class="st-04-blobs" aria-hidden="true">\n    <span class="st-04-blob st-04-blob--green-a"></span>\n    <span class="st-04-blob st-04-blob--violet-a"></span>\n    <span class="st-04-blob st-04-blob--green-b"></span>\n    <span class="st-04-blob st-04-blob--violet-b"></span>\n  </div>\n  <div class="st-04-content"><h2>AURORA BOREAL</h2></div>\n</div>',
+        css: '.st-04-blobs { position: absolute; inset: -25%; filter: blur(58px); }\n.st-04-blob { mix-blend-mode: screen; animation: st-04-drift-a 14s ease-in-out infinite alternate; }',
+        js: '// Botón opcional para ocultar o mostrar el texto sobre el fondo.'
+      }
+    },
+    {
+      number: '05',
+      id: 'estilo-05-grain',
+      slug: '05-grain',
+      category: 'estilos-web',
+      modeLabel: 'Textura',
+      name: 'Grain',
+      description: 'Degradado editorial con textura de grano fílmico sutil mediante SVG.',
+      tags: ['SVG', 'feTurbulence', 'Textura'],
+      continuous: false,
+      replayable: false,
+      path: 'efectos/estilos-web/05-grain.html',
+      hint: 'Ajusta la intensidad del grano con el deslizador o alterna la paleta de gradiente.',
+      previewHtml:
+        '<div class="st-05-grain"><svg class="st-05-noise" aria-hidden="true"><filter id="st-05-noise-mini"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#st-05-noise-mini)"/></svg><div class="st-05-content"><div class="st-05-title">GRAIN</div></div></div>',
+      code: {
+        html: '<div class="st-05-grain">\n  <svg class="st-05-noise" aria-hidden="true">\n    <filter id="st-05-noise-filter">\n      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/>\n    </filter>\n    <rect width="100%" height="100%" filter="url(#st-05-noise-filter)"/>\n  </svg>\n  <h2>TEXTURA GRAIN</h2>\n</div>',
+        css: '.st-05-noise { position: absolute; inset: 0; width: 100%; height: 100%; opacity: var(--grain-opacity, 0.24); mix-blend-mode: overlay; }',
+        js: '// Control en vivo de --grain-opacity y selector de paleta.'
+      }
+    },
+    {
+      number: '06',
+      id: 'estilo-06-isometrico',
+      slug: '06-isometrico',
+      category: 'estilos-web',
+      modeLabel: 'Ilustración',
+      name: 'Isométrico',
+      description: 'Ilustración arquitectónica isométrica en SVG con planos flotantes.',
+      tags: ['SVG', 'Isometría', 'Ilustración'],
+      continuous: true,
+      replayable: false,
+      path: 'efectos/estilos-web/06-isometrico.html',
+      hint: 'Proyección isométrica a 30° con caras iluminadas, levitación suave y respuesta al puntero.',
+      previewHtml:
+        '<div class="st-06-iso"><svg class="st-06-svg" viewBox="0 0 360 280" aria-hidden="true"><g class="st-06-base"><polygon points="180,235 45,165 180,95 315,165" fill="#1e2538" stroke="#3b4768" stroke-width="2"/><polygon points="45,165 180,235 180,252 45,182" fill="#141928"/><polygon points="315,165 180,235 180,252 315,182" fill="#0d111b"/></g><g class="st-06-float st-06-float--cube"><polygon points="180,82 232,109 180,136 128,109" fill="#00e5ff"/><polygon points="128,109 180,136 180,182 128,155" fill="#0891b2"/><polygon points="232,109 180,136 180,182 232,155" fill="#164e63"/></g><g class="st-06-float st-06-float--card"><polygon points="246,72 284,92 246,112 208,92" fill="#a78bfa"/><polygon points="208,92 246,112 246,144 208,124" fill="#7c3aed"/><polygon points="284,92 246,112 246,144 284,124" fill="#4c1d95"/></g></svg></div>',
+      code: {
+        html: '<svg class="st-06-svg" viewBox="0 0 420 320" role="img" aria-label="Ilustración isométrica">\n  <!-- Base y prismas proyectados a 30° con tres caras sombreadas -->\n</svg>',
+        css: '.st-06-float--card { animation: st-06-hover 5.2s ease-in-out infinite; }\n.st-06-float--cube { animation: st-06-hover 4.4s ease-in-out 0.7s infinite; }',
+        js: '// Ilustración vectorial pura SVG + animación CSS.'
+      }
+    },
+    {
+      number: '07',
+      id: 'estilo-07-neo-graffiti',
+      slug: '07-neo-graffiti',
+      category: 'estilos-web',
+      modeLabel: 'Neo-Graffiti',
+      name: 'Neo-Graffiti',
+      description: 'Estética neo-graffiti sobre hormigón claro con brocha negra, verde ácido y garabatos spray.',
+      tags: ['SVG', 'Spray', 'Neo-Graffiti'],
+      continuous: false,
+      replayable: true,
+      path: 'efectos/estilos-web/07-neo-graffiti.html',
+      hint: 'Pulsa Repetir para volver a trazar los brochazos y garabatos en spray sobre el lienzo.',
+      previewHtml:
+        '<div class="st-07-neograff"><div class="st-07-nav"><span class="st-07-brand">ART DAY</span><span>HOME · GALLERY</span></div><div class="st-07-body"><div><div class="st-07-headline">CREA ALGO<br>QUE ROMPA.</div><span class="st-07-btn">VER OBRA</span></div><svg class="st-07-art" viewBox="0 0 240 160" aria-hidden="true"><defs><filter id="st-07-spray-mini"><feTurbulence type="fractalNoise" baseFrequency="0.12" numOctaves="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="9"/></filter></defs><g filter="url(#st-07-spray-mini)"><path d="M35 125 L125 22 L205 68 L112 146 Z" fill="#111318"/><path d="M88 142 L185 38" stroke="#c8ff00" stroke-width="14" stroke-linecap="round"/><path d="M52 74 C76 42, 108 98, 136 52 C156 26, 174 84, 198 44" fill="none" stroke="#c8ff00" stroke-width="4" stroke-linecap="round"/></g><path d="M196 34 L200 44 L210 48 L200 52 L196 62 L192 52 L182 48 L192 44 Z" fill="#111318"/></svg></div></div>',
+      code: {
+        html: '<section class="st-07-neograff">\n  <!-- Hero editorial sobre textura hormigón + composición SVG con filtro feTurbulence/feDisplacementMap -->\n</section>',
+        css: '.st-07-neograff { background: linear-gradient(145deg, #d7dae0, #bfc4ce); color: #111318; }\n.st-07-scribble { stroke-dasharray: 460; animation: st-07-draw 1.2s cubic-bezier(0.22, 1, 0.36, 1) both; }',
+        js: '// Efecto 100% CSS + SVG procedural.'
+      }
+    },
+    {
+      number: '08',
+      id: 'estilo-08-graffiti-vivo',
+      slug: '08-graffiti-vivo',
+      category: 'estilos-web',
+      modeLabel: 'Graffiti Spray',
+      name: 'Graffiti Vivo',
+      description: 'Editorial de marco saturado con garabatos multicolores en aerosol spray.',
+      tags: ['SVG', 'Aerosol', 'Colores Vivos'],
+      continuous: false,
+      replayable: true,
+      path: 'efectos/estilos-web/08-graffiti-vivo.html',
+      hint: 'Cambia entre las 3 paletas vivas o pulsa Repetir para disparar de nuevo el trazo spray.',
+      previewHtml:
+        '<div class="st-08-graffvivo"><div class="st-08-sheet"><div class="st-08-topbar"><span>WORK</span><span>DISTRIKT STUDIO©</span><span>CONTACT</span></div><div class="st-08-headline">distrikt studio©</div><svg class="st-08-spray-svg" viewBox="0 0 360 110" aria-hidden="true"><defs><filter id="st-08-spray-mini"><feTurbulence type="fractalNoise" baseFrequency="0.14" numOctaves="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="8"/></filter></defs><g filter="url(#st-08-spray-mini)"><path d="M12 96 L48 26 L78 88 L112 24 C134 78, 158 18, 184 82 L224 22 L254 92 L292 28 C312 72, 332 34, 348 86" fill="none" stroke="var(--graff-a)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M36 74 C92 18, 146 98, 214 34 C258 84, 304 20, 344 58" fill="none" stroke="var(--graff-b)" stroke-width="7" stroke-linecap="round"/><path d="M24 38 C88 86, 174 16, 266 78" fill="none" stroke="var(--graff-c)" stroke-width="5" stroke-linecap="round"/></g></svg></div></div>',
+      code: {
+        html: '<section class="st-08-graffvivo" data-graff-box data-graff-theme="orange">\n  <!-- Doble pasada SVG: niebla difuminada (overspray) + trazo desplazado con feTurbulence -->\n</section>',
+        css: '.st-08-graffvivo { padding: 16px; background: var(--graff-a, #ff3d1f); }\n.st-08-spray-core { filter: url(#st-08-spray-stage); stroke-dasharray: 900; animation: st-08-spray-in 1.4s ease-out both; }',
+        js: '// Selector de 3 paletas vivas (Naranja Vivo, Ciber Pop, Calle Neón).'
       }
     }
   ];

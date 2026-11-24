@@ -64,8 +64,12 @@
     }
     if (!searchQuery) return true;
     var q = normalizeText(searchQuery);
+    var catObj = data.categories.find(function (c) {
+      return c.id === fx.category;
+    });
+    var catName = catObj ? catObj.name : '';
     var haystack = normalizeText(
-      fx.number + ' ' + fx.name + ' ' + fx.description + ' ' + fx.tags.join(' ')
+      fx.number + ' ' + fx.name + ' ' + fx.description + ' ' + catName + ' ' + fx.tags.join(' ')
     );
     return haystack.indexOf(q) !== -1;
   }
@@ -167,14 +171,14 @@
       grid.innerHTML =
         '<div class="empty-state">' +
         '<h3>Sin coincidencias</h3>' +
-        '<p>Prueba con otro término como "resorte", "3D", "glitch" o un número del 01 al 20.</p>' +
+        '<p>Prueba con otro término como "claymorphism", "aurora", "glitch", "resorte" o un número.</p>' +
         '</div>';
       return;
     }
 
     grid.innerHTML = filtered
       .map(function (fx) {
-        var modeLabel = fx.continuous ? 'Continuo' : 'Disparable';
+        var modeLabel = fx.modeLabel || (fx.continuous ? 'Continuo' : 'Disparable');
         var tagsHtml = fx.tags
           .map(function (tag) {
             return '<span class="effect-card__tag">' + tag + '</span>';

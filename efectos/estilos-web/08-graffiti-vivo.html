@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>08. Graffiti Vivo — Estilos Web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/effect-page.css">
+  <link rel="stylesheet" href="../../assets/css/effects-styles.css">
+  <script src="../../assets/js/theme.js"></script>
+</head>
+<body data-effect-id="estilo-08-graffiti-vivo">
+  <header class="site-topbar">
+    <div class="container site-topbar__inner">
+      <div class="effect-nav-left">
+        <a class="btn-pill" href="../../index.html">← Catálogo</a>
+        <span class="badge badge-accent">Estilos Web</span>
+      </div>
+      <div class="effect-nav-right">
+        <span id="effect-counter" class="effect-counter">08 / 08</span>
+        <button type="button" id="theme-toggle" class="btn-pill theme-toggle" aria-label="Cambiar tema">
+          <span data-theme-icon aria-hidden="true">☾</span>
+          <span data-theme-label>Oscuro</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container effect-main">
+    <header class="effect-header">
+      <div>
+        <div class="effect-header__meta">
+          <span class="effect-header__num">ESTILO #08</span>
+          <span class="badge">Graffiti Spray</span>
+        </div>
+        <h1 class="effect-header__title">Graffiti Vivo</h1>
+        <p class="effect-header__subtitle">Editorial de marco saturado con garabatos multicolores en aerosol spray.</p>
+      </div>
+      <div class="effect-header__tags">
+        <span class="badge">SVG</span>
+        <span class="badge">Aerosol</span>
+        <span class="badge">Colores Vivos</span>
+      </div>
+    </header>
+
+    <section class="stage-card" aria-label="Demostración en vivo">
+      <div class="stage-toolbar">
+        <div class="stage-toolbar__group">
+          <button type="button" id="btn-replay" class="btn-pill is-primary">↻ Repetir</button>
+          <button type="button" id="btn-pause" class="btn-pill" hidden>Pausar</button>
+        </div>
+        <div class="stage-surface-group" role="group" aria-label="Fondo del escenario">
+          <button type="button" class="stage-surface-btn is-active" data-surface-btn="grid">Cuadrícula</button>
+          <button type="button" class="stage-surface-btn" data-surface-btn="dark">Oscuro</button>
+          <button type="button" class="stage-surface-btn" data-surface-btn="light">Claro</button>
+        </div>
+      </div>
+
+      <div id="stage-canvas" class="stage-canvas" data-surface="grid">
+        <div id="effect-demo">
+          <section class="st-08-graffvivo" data-graff-box data-graff-theme="orange" aria-label="Landing estilo Graffiti Vivo">
+            <div class="st-08-sheet">
+              <div class="st-08-topbar">
+                <span>OBRA</span>
+                <span>DIARIO</span>
+                <span class="st-08-center">distrikt studio©</span>
+                <span>ESTUDIO</span>
+                <span>CONTACTO</span>
+              </div>
+
+              <div class="st-08-head">
+                <h2 class="st-08-headline">distrikt studio©</h2>
+                <div class="st-08-subrow">
+                  <span class="st-08-tag">ESTUDIO DIGITAL · ARTE URBANO</span>
+                  <p class="st-08-copy">
+                    <strong>distrikt studio©</strong> fusiona retículas editoriales limpias con trazos vivos de aerosol y garabatos spray.
+                  </p>
+                </div>
+              </div>
+
+              <svg class="st-08-spray-svg" viewBox="0 0 680 185" role="img" aria-label="Garabatos multicolores pintados con spray aerosol">
+                <defs>
+                  <filter id="st-08-spray-stage" x="-10%" y="-20%" width="120%" height="140%">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.13" numOctaves="3" result="noise"></feTurbulence>
+                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="11"></feDisplacementMap>
+                  </filter>
+                  <filter id="st-08-mist-stage" x="-15%" y="-25%" width="130%" height="150%">
+                    <feGaussianBlur stdDeviation="5.5"></feGaussianBlur>
+                  </filter>
+                </defs>
+
+                <!-- Capa 1: Niebla suave de overspray -->
+                <g filter="url(#st-08-mist-stage)" opacity="0.34">
+                  <path class="st-08-spray-path" d="M18 164 L78 34 L126 156 L186 28 C218 134, 264 24, 308 152 L368 32 L418 158 L484 36 C518 132, 566 28, 616 154 L662 48" fill="none" stroke="var(--graff-a)" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path class="st-08-spray-path st-08-spray-path--2" d="M44 128 C134 26, 232 162, 336 48 C416 144, 514 22, 646 106" fill="none" stroke="var(--graff-b)" stroke-width="18" stroke-linecap="round"></path>
+                </g>
+
+                <!-- Capa 2: Trazos principales con textura granulada de spray -->
+                <g filter="url(#st-08-spray-stage)">
+                  <path class="st-08-spray-path" d="M18 164 L78 34 L126 156 L186 28 C218 134, 264 24, 308 152 L368 32 L418 158 L484 36 C518 132, 566 28, 616 154 L662 48" fill="none" stroke="var(--graff-a)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path class="st-08-spray-path st-08-spray-path--2" d="M44 128 C134 26, 232 162, 336 48 C416 144, 514 22, 646 106" fill="none" stroke="var(--graff-b)" stroke-width="10" stroke-linecap="round"></path>
+                  <path class="st-08-spray-path st-08-spray-path--3" d="M36 52 C142 158, 286 14, 428 144 C512 42, 586 132, 654 34" fill="none" stroke="var(--graff-c)" stroke-width="7.5" stroke-linecap="round"></path>
+                </g>
+
+                <!-- Partículas y gotas de aerosol dispersas -->
+                <g fill="var(--graff-a)" opacity="0.85">
+                  <circle cx="92" cy="22" r="3"></circle>
+                  <circle cx="204" cy="18" r="2.2"></circle>
+                  <circle cx="384" cy="20" r="3.4"></circle>
+                  <circle cx="516" cy="24" r="2.5"></circle>
+                </g>
+                <g fill="var(--graff-b)" opacity="0.88">
+                  <circle cx="152" cy="142" r="2.8"></circle>
+                  <circle cx="348" cy="158" r="3"></circle>
+                  <circle cx="554" cy="148" r="2.6"></circle>
+                </g>
+              </svg>
+
+              <div class="st-08-palettes" role="group" aria-label="Paleta de graffiti">
+                <button type="button" class="st-08-chip is-active" data-graff-theme-btn="orange">Naranja Vivo</button>
+                <button type="button" class="st-08-chip" data-graff-theme-btn="cyber">Ciber Pop</button>
+                <button type="button" class="st-08-chip" data-graff-theme-btn="neon">Calle Neón</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="stage-hint">
+        <span>Cambia entre las 3 paletas vivas o pulsa <strong class="mono-num">R</strong> para volver a pintar los garabatos spray.</span>
+        <span>Atajos: <kbd class="kbd">R</kbd> repetir · <kbd class="kbd">←</kbd> <kbd class="kbd">→</kbd> navegar</span>
+      </div>
+    </section>
+
+    <details class="code-drawer">
+      <summary class="code-drawer__summary">
+        <span>Ver código fuente (HTML / CSS / JS)</span>
+        <span class="code-drawer__chevron" aria-hidden="true">▾</span>
+      </summary>
+      <div class="code-drawer__body">
+        <div class="code-tabs-bar">
+          <div class="code-tabs" role="tablist">
+            <button type="button" class="code-tab is-active" data-code-tab="html">HTML</button>
+            <button type="button" class="code-tab" data-code-tab="css">CSS</button>
+            <button type="button" class="code-tab" data-code-tab="js">JS</button>
+          </div>
+          <button type="button" id="copy-code-btn" class="btn-pill">Copiar código</button>
+        </div>
+        <pre id="code-output" class="code-pre"></pre>
+      </div>
+    </details>
+
+    <nav class="effect-pager" aria-label="Navegación entre estilos">
+      <a id="pager-prev" class="pager-link" href="07-neo-graffiti.html">
+        <span class="pager-link__dir">← Anterior</span>
+        <span class="pager-link__title">07. Neo-Graffiti</span>
+      </a>
+      <a id="pager-next" class="pager-link pager-link--next" href="01-claymorphism.html">
+        <span class="pager-link__dir">Siguiente →</span>
+        <span class="pager-link__title">01. Claymorphism</span>
+      </a>
+    </nav>
+  </main>
+
+  <script src="../../assets/js/catalog-data.js"></script>
+  <script src="../../assets/js/effect-page.js"></script>
+</body>
+</html>

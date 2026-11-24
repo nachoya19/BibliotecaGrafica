@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>04. Aurora — Estilos Web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/effect-page.css">
+  <link rel="stylesheet" href="../../assets/css/effects-styles.css">
+  <script src="../../assets/js/theme.js"></script>
+</head>
+<body data-effect-id="estilo-04-aurora">
+  <header class="site-topbar">
+    <div class="container site-topbar__inner">
+      <div class="effect-nav-left">
+        <a class="btn-pill" href="../../index.html">← Catálogo</a>
+        <span class="badge badge-accent">Estilos Web</span>
+      </div>
+      <div class="effect-nav-right">
+        <span id="effect-counter" class="effect-counter">04 / 06</span>
+        <button type="button" id="theme-toggle" class="btn-pill theme-toggle" aria-label="Cambiar tema">
+          <span data-theme-icon aria-hidden="true">☾</span>
+          <span data-theme-label>Oscuro</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container effect-main">
+    <header class="effect-header">
+      <div>
+        <div class="effect-header__meta">
+          <span class="effect-header__num">ESTILO #04</span>
+          <span class="badge">Fondo vivo</span>
+        </div>
+        <h1 class="effect-header__title">Aurora</h1>
+        <p class="effect-header__subtitle">Fondo aurora atmosférico en verde esmeralda y violeta en movimiento orgánico.</p>
+      </div>
+      <div class="effect-header__tags">
+        <span class="badge">CSS</span>
+        <span class="badge">Gradiente</span>
+        <span class="badge">Atmosférico</span>
+      </div>
+    </header>
+
+    <section class="stage-card" aria-label="Demostración en vivo">
+      <div class="stage-toolbar">
+        <div class="stage-toolbar__group">
+          <button type="button" id="btn-replay" class="btn-pill is-primary" hidden>↻ Repetir</button>
+          <button type="button" id="btn-pause" class="btn-pill">Pausar</button>
+        </div>
+        <div class="stage-surface-group" role="group" aria-label="Fondo del escenario">
+          <button type="button" class="stage-surface-btn is-active" data-surface-btn="grid">Cuadrícula</button>
+          <button type="button" class="stage-surface-btn" data-surface-btn="dark">Oscuro</button>
+          <button type="button" class="stage-surface-btn" data-surface-btn="light">Claro</button>
+        </div>
+      </div>
+
+      <div id="stage-canvas" class="stage-canvas" data-surface="grid">
+        <div id="effect-demo">
+          <div class="st-04-aurora" data-aurora-box>
+            <div class="st-04-blobs" aria-hidden="true">
+              <span class="st-04-blob st-04-blob--green-a"></span>
+              <span class="st-04-blob st-04-blob--violet-a"></span>
+              <span class="st-04-blob st-04-blob--green-b"></span>
+              <span class="st-04-blob st-04-blob--violet-b"></span>
+            </div>
+            <div class="st-04-content">
+              <h2 class="st-04-title">AURORA BOREAL</h2>
+              <p class="st-04-sub">Capas radiales en verde esmeralda y violeta con desplazamiento orgánico.</p>
+            </div>
+            <button type="button" class="st-04-toggle" data-aurora-toggle>Ocultar texto</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-hint">
+        <span>Usa el botón inferior derecho para inspeccionar el fondo puro en verde y violeta.</span>
+        <span>Atajos: <kbd class="kbd">Espacio</kbd> pausar · <kbd class="kbd">←</kbd> <kbd class="kbd">→</kbd> navegar</span>
+      </div>
+    </section>
+
+    <details class="code-drawer">
+      <summary class="code-drawer__summary">
+        <span>Ver código fuente (HTML / CSS / JS)</span>
+        <span class="code-drawer__chevron" aria-hidden="true">▾</span>
+      </summary>
+      <div class="code-drawer__body">
+        <div class="code-tabs-bar">
+          <div class="code-tabs" role="tablist">
+            <button type="button" class="code-tab is-active" data-code-tab="html">HTML</button>
+            <button type="button" class="code-tab" data-code-tab="css">CSS</button>
+            <button type="button" class="code-tab" data-code-tab="js">JS</button>
+          </div>
+          <button type="button" id="copy-code-btn" class="btn-pill">Copiar código</button>
+        </div>
+        <pre id="code-output" class="code-pre"></pre>
+      </div>
+    </details>
+
+    <nav class="effect-pager" aria-label="Navegación entre estilos">
+      <a id="pager-prev" class="pager-link" href="03-skeuomorphism.html">
+        <span class="pager-link__dir">← Anterior</span>
+        <span class="pager-link__title">03. Skeuomorphism</span>
+      </a>
+      <a id="pager-next" class="pager-link pager-link--next" href="05-grain.html">
+        <span class="pager-link__dir">Siguiente →</span>
+        <span class="pager-link__title">05. Grain</span>
+      </a>
+    </nav>
+  </main>
+
+  <script src="../../assets/js/catalog-data.js"></script>
+  <script src="../../assets/js/effect-page.js"></script>
+</body>
+</html>

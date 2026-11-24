@@ -35,6 +35,17 @@ No requiere compilación ni instalación de dependencias:
 20. **Split Halves** (`efectos/animaciones-texto/20-split-halves.html`)
 21. **Circular Text** (`efectos/animaciones-texto/21-circular-text.html`)
 
+## Categoría: Estilos Web (01–08)
+
+1. **Claymorphism** (`efectos/estilos-web/01-claymorphism.html`)
+2. **Brutalismo** (`efectos/estilos-web/02-brutalismo.html`)
+3. **Skeuomorphism** (`efectos/estilos-web/03-skeuomorphism.html`)
+4. **Aurora** (`efectos/estilos-web/04-aurora.html`)
+5. **Grain** (`efectos/estilos-web/05-grain.html`)
+6. **Isométrico** (`efectos/estilos-web/06-isometrico.html`)
+7. **Neo-Graffiti** (`efectos/estilos-web/07-neo-graffiti.html`)
+8. **Graffiti Vivo** (`efectos/estilos-web/08-graffiti-vivo.html`)
+
 ## Cómo añadir nuevas categorías o efectos
 
 1. Crea una carpeta para la categoría dentro de `efectos/` (por ejemplo, `efectos/botones/`) y su hoja CSS en `assets/css/`.

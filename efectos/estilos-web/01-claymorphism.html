@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01. Claymorphism — Estilos Web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/effect-page.css">
+  <link rel="stylesheet" href="../../assets/css/effects-styles.css">
+  <script src="../../assets/js/theme.js"></script>
+</head>
+<body data-effect-id="estilo-01-claymorphism">
+  <header class="site-topbar">
+    <div class="container site-topbar__inner">
+      <div class="effect-nav-left">
+        <a class="btn-pill" href="../../index.html">← Catálogo</a>
+        <span class="badge badge-accent">Estilos Web</span>
+      </div>
+      <div class="effect-nav-right">
+        <span id="effect-counter" class="effect-counter">01 / 06</span>
+        <button type="button" id="theme-toggle" class="btn-pill theme-toggle" aria-label="Cambiar tema">
+          <span data-theme-icon aria-hidden="true">☾</span>
+          <span data-theme-label>Oscuro</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container effect-main">
+    <header class="effect-header">
+      <div>
+        <div class="effect-header__meta">
+          <span class="effect-header__num">ESTILO #01</span>
+          <span class="badge">Estilo UI</span>
+        </div>
+        <h1 class="effect-header__title">Claymorphism</h1>
+        <p class="effect-header__subtitle">Tarjetas y botones inflados en 3D suave con doble sombra interior.</p>
+      </div>
+      <div class="effect-header__tags">
+        <span class="badge">CSS</span>
+        <span class="badge">Sombras 3D</span>
+        <span class="badge">UI Pastel</span>
+      </div>
+    </header>
+
+    <section class="stage-card" aria-label="Demostración en vivo">
+      <div class="stage-toolbar">
+        <div class="stage-toolbar__group">
+          <button type="button" id="btn-replay" class="btn-pill is-primary" hidden>↻ Repetir</button>
+          <button type="button" id="btn-pause" class="btn-pill" hidden>Pausar</button>
+        </div>
+        <div class="stage-surface-group" role="group" aria-label="Fondo del escenario">
+          <button type="button" class="stage-surface-btn is-active" data-surface-btn="grid">Cuadrícula</button>
+          <button type="button" class="stage-surface-btn" data-surface-btn="dark">Oscuro</button>
+          <button type="button" class="stage-surface-btn" data-surface-btn="light">Claro</button>
+        </div>
+      </div>
+
+      <div id="stage-canvas" class="stage-canvas" data-surface="grid">
+        <div id="effect-demo">
+          <div class="st-01-board">
+            <div class="st-01-grid">
+              <article class="st-01-card">
+                <div class="st-01-top">
+                  <span class="st-01-badge-icon" aria-hidden="true">✦</span>
+                  <div>
+                    <div class="st-01-kicker">Módulo 3D suave</div>
+                    <h2 class="st-01-title">Sistema Claymorphism</h2>
+                  </div>
+                </div>
+                <p class="st-01-desc">
+                  Volumen blando logrado combinando bordes muy redondeados, una sombra exterior difusa y dos brillos interiores opuestos.
+                </p>
+                <div class="st-01-track" aria-label="Progreso 72%">
+                  <span class="st-01-fill"></span>
+                </div>
+              </article>
+
+              <article class="st-01-card st-01-card--lilac">
+                <div class="st-01-kicker">Componentes</div>
+                <h2 class="st-01-title">Botones táctiles</h2>
+                <p class="st-01-desc">
+                  Haz clic en los botones inferiores para notar la compresión elástica al presionar.
+                </p>
+              </article>
+            </div>
+
+            <div class="st-01-actions">
+              <button type="button" class="st-01-btn st-01-btn--lilac">Explorar UI</button>
+              <button type="button" class="st-01-btn st-01-btn--coral">Guardar estilo</button>
+              <button type="button" class="st-01-btn st-01-btn--mint">Aplicar tema</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-hint">
+        <span>Haz clic sobre los botones pastel para probar la respuesta de compresión clay.</span>
+        <span>Atajos: <kbd class="kbd">←</kbd> <kbd class="kbd">→</kbd> navegar</span>
+      </div>
+    </section>
+
+    <details class="code-drawer">
+      <summary class="code-drawer__summary">
+        <span>Ver código fuente (HTML / CSS / JS)</span>
+        <span class="code-drawer__chevron" aria-hidden="true">▾</span>
+      </summary>
+      <div class="code-drawer__body">
+        <div class="code-tabs-bar">
+          <div class="code-tabs" role="tablist">
+            <button type="button" class="code-tab is-active" data-code-tab="html">HTML</button>
+            <button type="button" class="code-tab" data-code-tab="css">CSS</button>
+            <button type="button" class="code-tab" data-code-tab="js">JS</button>
+          </div>
+          <button type="button" id="copy-code-btn" class="btn-pill">Copiar código</button>
+        </div>
+        <pre id="code-output" class="code-pre"></pre>
+      </div>
+    </details>
+
+    <nav class="effect-pager" aria-label="Navegación entre estilos">
+      <a id="pager-prev" class="pager-link" href="08-graffiti-vivo.html">
+        <span class="pager-link__dir">← Anterior</span>
+        <span class="pager-link__title">08. Graffiti Vivo</span>
+      </a>
+      <a id="pager-next" class="pager-link pager-link--next" href="02-brutalismo.html">
+        <span class="pager-link__dir">Siguiente →</span>
+        <span class="pager-link__title">02. Brutalismo</span>
+      </a>
+    </nav>
+  </main>
+
+  <script src="../../assets/js/catalog-data.js"></script>
+  <script src="../../assets/js/effect-page.js"></script>
+</body>
+</html>
