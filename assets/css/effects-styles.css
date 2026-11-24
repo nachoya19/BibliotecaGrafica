@@ -3,7 +3,7 @@
    Supports full-stage showcase and compact .is-mini catalog card previews.
    ========================================================================== */
 
-#effect-demo:has(.st-01-board, .st-02-landing, .st-03-console, .st-04-aurora, .st-05-grain, .st-06-iso, .st-07-neograff, .st-08-graffvivo) {
+#effect-demo:has(.st-01-board, .st-02-landing, .st-03-console, .st-04-aurora, .st-05-grain, .st-06-iso, .st-07-neograff, .st-08-graffvivo, .st-09-sakuga) {
   width: 100%;
   display: grid;
   place-items: center;
@@ -1323,4 +1323,225 @@ html[data-theme="light"] .effect-card__preview .st-03-console {
   background: #111111;
   border-color: #111111;
   color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   09. Sakuga VFX (Anime UI Controls — Justin Finkelman)
+   -------------------------------------------------------------------------- */
+.st-09-sakuga {
+  width: 100%;
+  border-radius: 20px;
+  border: 1.5px solid #dcdaf0;
+  background: #ffffff;
+  color: #1d1a4a;
+  padding: clamp(1rem, 2.5vw, 1.6rem);
+  display: grid;
+  gap: 1.15rem;
+}
+
+.st-09-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  border: 1.5px solid #dcdaf0;
+  background: #f4f3fc;
+}
+
+.st-09-banner__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.st-09-banner__title {
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #1d1a4a;
+}
+
+.st-09-banner__sub {
+  font-size: 0.82rem;
+  color: #5b558a;
+}
+
+.st-09-repo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  border: 1.5px solid #1d1a4a;
+  background: #ffffff;
+  color: #1d1a4a;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.st-09-repo-link:hover {
+  background: #1d1a4a;
+  color: #ffffff;
+}
+
+.st-09-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 1rem;
+}
+
+.st-09-item {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1.5px solid #dcdaf0;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.st-09-item--wide {
+  grid-column: span 2;
+}
+
+.st-09-item__head {
+  padding: 0.9rem 1rem 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.st-09-item__head h3 {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: #1d1a4a;
+}
+
+.st-09-item__tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #7c76a8;
+}
+
+.st-09-item__how {
+  padding: 0.2rem 1rem 0;
+  font-size: 0.8rem;
+  color: #6b6699;
+}
+
+.st-09-stage {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  min-height: 165px;
+  padding: 1.2rem 1rem;
+}
+
+.st-09-toastwrap {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+}
+
+.st-09-said {
+  min-height: 1.35em;
+  padding: 0 1rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: #5b4fd8;
+}
+
+.st-09-acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding: 0.75rem 1rem;
+  border-top: 1.5px solid #dcdaf0;
+  margin-top: 0.45rem;
+}
+
+.st-09-pill {
+  height: 30px;
+  padding: 0 0.75rem;
+  border: 1.5px solid #dcdaf0;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #1d1a4a;
+  font-size: 0.76rem;
+  font-weight: 600;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.st-09-pill:hover {
+  border-color: #1d1a4a;
+}
+
+.st-09-pill--accent {
+  border-color: #8f8df7;
+  background: #f4f3fc;
+}
+
+@media (max-width: 680px) {
+  .st-09-item--wide {
+    grid-column: auto;
+  }
+}
+
+/* Catalog mini preview for 09. Sakuga VFX */
+.st-09-mini {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  color: #1d1a4a;
+  display: grid;
+  place-items: center;
+}
+
+.st-09-mini-burst {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.st-09-mini-star {
+  position: absolute;
+  width: 146px;
+  height: 92px;
+  pointer-events: none;
+}
+
+.st-09-mini-btn {
+  position: relative;
+  z-index: 2;
+  padding: 0.42rem 1.05rem;
+  border-radius: 12px;
+  border: 2.5px solid #1d1a4a;
+  background: #8f8df7;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 0.84rem;
+  font-weight: 700;
+  box-shadow: 4px 5px 0 #b8b3ff;
+  transform: rotate(-2deg);
+}
+
+.st-09-mini-sfx {
+  position: absolute;
+  top: -18px;
+  right: -12px;
+  z-index: 3;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #ff5fa8;
+  text-shadow: 1.5px 1.5px 0 #1d1a4a;
+  transform: rotate(8deg);
 }

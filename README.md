@@ -2,7 +2,7 @@
 
 Catálogo web personal de referencia visual para consultar estilos, animaciones de texto y microinteracciones listas para aplicar en proyectos web.
 
-Cada efecto cuenta con una **página HTML propia** donde se muestra su nombre, descripción, un escenario interactivo en vivo (con botones para **Repetir**, **Pausar/Reanudar**, cambiar fondo **Oscuro / Claro / Cuadrícula**) y un cajón desplegable con su código HTML, CSS y JS copiable.
+Cada efecto cuenta con una **página HTML propia** donde se muestra su nombre, descripción, un escenario interactivo en vivo (con botones para **Repetir**, **Pausar/Reanudar**, cambiar fondo **Oscuro / Claro / Cuadrícula**), un bloque **Prompt para agente IA** listo para copiar y pedir ese componente concreto a un agente, y un cajón desplegable con su código HTML, CSS y JS copiable.
 
 ## Cómo abrir la biblioteca
 
@@ -35,7 +35,7 @@ No requiere compilación ni instalación de dependencias:
 20. **Split Halves** (`efectos/animaciones-texto/20-split-halves.html`)
 21. **Circular Text** (`efectos/animaciones-texto/21-circular-text.html`)
 
-## Categoría: Estilos Web (01–08)
+## Categoría: Estilos Web (01–09)
 
 1. **Claymorphism** (`efectos/estilos-web/01-claymorphism.html`)
 2. **Brutalismo** (`efectos/estilos-web/02-brutalismo.html`)
@@ -45,6 +45,7 @@ No requiere compilación ni instalación de dependencias:
 6. **Isométrico** (`efectos/estilos-web/06-isometrico.html`)
 7. **Neo-Graffiti** (`efectos/estilos-web/07-neo-graffiti.html`)
 8. **Graffiti Vivo** (`efectos/estilos-web/08-graffiti-vivo.html`)
+9. **Sakuga VFX** (`efectos/estilos-web/09-sakuga-vfx.html`) — Autor: [Justin Finkelman](https://github.com/finktheartist/sakuga-vfx/tree/main) (MIT)
 
 ## Cómo añadir nuevas categorías o efectos
 

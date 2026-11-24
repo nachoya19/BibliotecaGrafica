@@ -416,6 +416,275 @@
     return null;
   }
 
+  function copyToClipboard(text, btn, copiedLabel) {
+    function showCopied() {
+      if (!btn) return;
+      var prev = btn.textContent;
+      btn.textContent = copiedLabel || 'Copiado ✓';
+      setTimeout(function () {
+        btn.textContent = prev;
+      }, 1500);
+    }
+
+    function fallbackCopy() {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+      } catch (_) {
+        // Ignore
+      }
+      document.body.removeChild(ta);
+      showCopied();
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(showCopied, fallbackCopy);
+    } else {
+      fallbackCopy();
+    }
+  }
+
+  function setupSakugaGallery(stage) {
+    var gallery = stage && stage.querySelector('[data-sakuga-gallery]');
+    if (!gallery) return null;
+
+    var REPO = 'finktheartist/sakuga-vfx';
+    var REPO_TREE = 'https://github.com/finktheartist/sakuga-vfx/tree/main';
+    var SKILL_URL = 'https://github.com/finktheartist/sakuga-vfx/blob/main/skills/sakuga-vfx/SKILL.md';
+
+    var WIRE = {
+      'button-primary': {
+        fileId: 'button',
+        title: 'Sakuga Primary Button',
+        tag: 'sakuga-button',
+        steps: [
+          'Usa `<sakuga-button>Confirm</sakuga-button>` para la acción principal.',
+          'Escucha el evento `click` y llama a `el.done()` cuando la acción termine con éxito para mostrar el check animado.'
+        ]
+      },
+      'button-secondary': {
+        fileId: 'button',
+        title: 'Sakuga Secondary Button',
+        tag: 'sakuga-button',
+        steps: [
+          'Usa `<sakuga-button variant="secondary">Cancel</sakuga-button>` para una variante secundaria más discreta con compresión suave y cuñas.',
+          'Escucha el evento `click` como en un botón normal (`disabled` y `type="submit"` funcionan igual).'
+        ]
+      },
+      toggle: {
+        fileId: 'toggle',
+        title: 'Sakuga Toggle',
+        tag: 'sakuga-toggle',
+        steps: [
+          'Usa `<sakuga-toggle label="..."></sakuga-toggle>` en lugar del interruptor actual.',
+          'Lee `el.checked`, escucha `change` y añade `name="..."` si va dentro de un `<form>`.'
+        ]
+      },
+      slider: {
+        fileId: 'slider',
+        title: 'Sakuga Slider',
+        tag: 'sakuga-slider',
+        steps: [
+          'Usa `<sakuga-slider value="30" label="..."></sakuga-slider>` (acepta `min`, `max`, `step`, `unit`).',
+          'Lee `el.value`, escucha `input`/`change` y ajusta el ancho con `--sk-slider-width` si hace falta.'
+        ]
+      },
+      checkbox: {
+        fileId: 'checkbox',
+        title: 'Sakuga Checkbox',
+        tag: 'sakuga-checkbox',
+        steps: [
+          'Usa `<sakuga-checkbox>Texto</sakuga-checkbox>` en lugar del checkbox actual.',
+          'Lee `el.checked`, escucha `change` y usa `name` dentro de formularios.'
+        ]
+      },
+      radio: {
+        fileId: 'radio',
+        title: 'Sakuga Radio',
+        tag: 'sakuga-radio',
+        steps: [
+          'Coloca las opciones como `<option>` dentro de `<sakuga-radio label="...">` (ej. `<option value="a" selected>Opción A</option>`).',
+          'Lee `el.value` y escucha `change`.'
+        ]
+      },
+      input: {
+        fileId: 'input',
+        title: 'Sakuga Text Input',
+        tag: 'sakuga-input',
+        steps: [
+          'Usa `<sakuga-input label="..." placeholder="..."></sakuga-input>` (acepta `type` como text, email, search, url, tel o password).',
+          'Lee/asigna `el.value`, escucha `input`/`change` y personaliza el ancho con `--sk-input-width`.'
+        ]
+      },
+      tabs: {
+        fileId: 'tabs',
+        title: 'Sakuga Tabs',
+        tag: 'sakuga-tabs',
+        steps: [
+          'Define las pestañas como `<option>` dentro de `<sakuga-tabs label="...">`.',
+          'Escucha `change` (`e.detail` incluye `index`, `value` y `label`) para mostrar el panel correspondiente.'
+        ]
+      },
+      progress: {
+        fileId: 'progress',
+        title: 'Sakuga Progress',
+        tag: 'sakuga-progress',
+        steps: [
+          'Usa `<sakuga-progress label="..."></sakuga-progress>` (no incluyas el atributo `demo` en producción).',
+          'Actualiza el progreso llamando a `el.set(n)` de `0` a `1`, escucha `sakuga:done` al completarse y usa `el.reset()` para reiniciar.'
+        ]
+      },
+      rating: {
+        fileId: 'rating',
+        title: 'Sakuga Rating',
+        tag: 'sakuga-rating',
+        steps: [
+          'Usa `<sakuga-rating label="..."></sakuga-rating>` para la valoración de 0 a 5 estrellas.',
+          'Lee `el.value` y escucha `change`.'
+        ]
+      },
+      toast: {
+        fileId: 'toast',
+        title: 'Sakuga Toast',
+        tag: 'sakuga-toast',
+        steps: [
+          'Coloca `<sakuga-toast></sakuga-toast>` (por ejemplo con `position: fixed; left: 24px; bottom: 24px;`) y llama a `el.show("Guardado")` cuando corresponda.',
+          'Controla el tiempo con el atributo `duration` (2.6 s por defecto) o ciérralo con `el.hide()`.'
+        ]
+      },
+      tooltip: {
+        fileId: 'tooltip',
+        title: 'Sakuga Tooltip',
+        tag: 'sakuga-tooltip',
+        steps: [
+          'Usa `<sakuga-tooltip text="Texto de ayuda" label="Ayuda"></sakuga-tooltip>` junto al elemento que quieras explicar.',
+          'Se abre al pasar el ratón, enfocar o tocar, y se cierra con Escape.'
+        ]
+      }
+    };
+
+    function buildControlPrompt(key) {
+      var spec = WIRE[key];
+      if (!spec) return '';
+      return [
+        'Añade únicamente el componente ' + spec.title + ' (`<' + spec.tag + '>`) de Sakuga VFX a mi aplicación.',
+        'Repositorio oficial del autor (Justin Finkelman): ' + REPO_TREE,
+        '1. Instala o copia solo el archivo `' + spec.fileId + '.js` (`npx shadcn add ' + REPO + '/' + spec.fileId + '` o desde `sakuga-vfx/' + spec.fileId + '/' + spec.fileId + '.js`). No lo reescribas ni redibujes el canvas manualmente.',
+        '2. Cárgalo con una etiqueta `<script src=".../' + spec.fileId + '.js"></script>` clásica (sin `type="module"`).',
+        '3. ' + spec.steps[0],
+        '4. ' + spec.steps[1],
+        '5. Respeta `prefers-reduced-motion` y personaliza los colores con variables CSS `--sk-*` (`--sk-ink`, `--sk-card`, `--sk-pri`, `--sk-acc`).',
+        'Skill de referencia: ' + SKILL_URL
+      ].join('\n');
+    }
+
+    gallery.querySelectorAll('.st-09-item').forEach(function (card) {
+      var said = card.querySelector('.st-09-said');
+      var say = function (msg) {
+        if (said) said.textContent = msg;
+      };
+
+      var primaryBtn = card.querySelector('sakuga-button[data-demo="primary"]');
+      var secondaryBtn = card.querySelector('sakuga-button[variant="secondary"]:not([data-demo="save"])');
+      var saveBtn = card.querySelector('sakuga-button[data-demo="save"]');
+      var toast = card.querySelector('sakuga-toast');
+      var toggle = card.querySelector('sakuga-toggle');
+      var slider = card.querySelector('sakuga-slider');
+      var checkbox = card.querySelector('sakuga-checkbox');
+      var radio = card.querySelector('sakuga-radio');
+      var input = card.querySelector('sakuga-input');
+      var tabs = card.querySelector('sakuga-tabs');
+      var progress = card.querySelector('sakuga-progress');
+      var rating = card.querySelector('sakuga-rating');
+
+      if (primaryBtn) {
+        primaryBtn.addEventListener('click', function () {
+          say('Clic detectado · ejecutando done()');
+          setTimeout(function () {
+            if (typeof primaryBtn.done === 'function') primaryBtn.done();
+          }, 760);
+        });
+      }
+      if (secondaryBtn) {
+        secondaryBtn.addEventListener('click', function () {
+          say('Clic en variante secundaria');
+        });
+      }
+      if (saveBtn && toast) {
+        saveBtn.addEventListener('click', function () {
+          if (typeof toast.show === 'function') toast.show('Saved successfully!');
+          say('Toast lanzado');
+        });
+      }
+      if (toggle) {
+        toggle.addEventListener('change', function () {
+          say('change: ' + (toggle.checked ? 'on' : 'off'));
+        });
+      }
+      if (slider) {
+        slider.addEventListener('change', function () {
+          say('value: ' + slider.value + '%');
+        });
+      }
+      if (checkbox) {
+        checkbox.addEventListener('change', function () {
+          say('checked: ' + (checkbox.checked ? 'true' : 'false'));
+        });
+      }
+      if (radio) {
+        radio.addEventListener('change', function () {
+          say('selected: ' + radio.value);
+        });
+      }
+      if (input) {
+        input.addEventListener('input', function () {
+          say(input.value ? 'texto: ' + input.value : '');
+        });
+      }
+      if (tabs) {
+        tabs.addEventListener('change', function (e) {
+          if (e.detail) say('Tab: ' + e.detail.label);
+        });
+      }
+      if (progress) {
+        progress.addEventListener('sakuga:done', function () {
+          say('Evento sakuga:done');
+        });
+      }
+      if (rating) {
+        rating.addEventListener('change', function () {
+          say('Valoración: ' + rating.value + ' / 5');
+        });
+      }
+
+      var promptBtn = card.querySelector('[data-sakuga-prompt]');
+      if (promptBtn) {
+        promptBtn.addEventListener('click', function () {
+          var key = promptBtn.getAttribute('data-sakuga-prompt');
+          copyToClipboard(buildControlPrompt(key), promptBtn, 'Prompt copiado ✓');
+          say('Prompt de ' + WIRE[key].title + ' copiado');
+        });
+      }
+
+      var installBtn = card.querySelector('[data-sakuga-install]');
+      if (installBtn) {
+        installBtn.addEventListener('click', function () {
+          var id = installBtn.getAttribute('data-sakuga-install');
+          var cmd = 'npx shadcn add ' + REPO + '/' + id;
+          copyToClipboard(cmd, installBtn, 'Comando copiado ✓');
+          say('Copiado: ' + cmd);
+        });
+      }
+    });
+
+    return null;
+  }
+
   function initEffectEngine(effectId, stage) {
     applySiblingFallback(stage);
     if (effectId === '01-typewriter') return setupTypewriter(stage);
@@ -428,12 +697,91 @@
     if (effectId === 'estilo-04-aurora') return setupAurora(stage);
     if (effectId === 'estilo-05-grain') return setupGrain(stage);
     if (effectId === 'estilo-08-graffiti-vivo') return setupGraffitiVivo(stage);
+    if (effectId === 'estilo-09-sakuga-vfx') return setupSakugaGallery(stage);
     return null;
   }
 
   // ------------------------------------------------------------------------
-  // Page Chrome: Metadata, Pager, Code Drawer, Toolbar Controls
+  // Page Chrome: Metadata, Agent Prompt, Pager, Code Drawer, Toolbar Controls
   // ------------------------------------------------------------------------
+  function buildAgentPrompt(fx) {
+    if (fx.agentPrompt) return fx.agentPrompt;
+
+    var catObj = data.categories.find(function (c) {
+      return c.id === fx.category;
+    });
+    var catName = catObj ? catObj.name : fx.category;
+    var lines = [
+      'Implementa únicamente el componente/efecto "' + fx.name + '" (' + catName + ') en mi página web.',
+      'Descripción visual: ' + fx.description,
+      fx.hint ? 'Comportamiento clave: ' + fx.hint : '',
+      'Requisitos técnicos:',
+      '- Usa HTML, CSS y JavaScript limpios sin añadir dependencias externas.'
+    ];
+
+    if (fx.category === 'animaciones-texto') {
+      lines.push('- Aplica la animación de forma aislada al bloque de texto correspondiente y respeta `@media (prefers-reduced-motion: reduce)` manteniendo el texto legible.');
+      if (fx.continuous) {
+        lines.push('- Como es una animación continua, ofrece un control accesible o pausa limpia sin usar `aria-pressed` si alterna su etiqueta.');
+      }
+    } else {
+      lines.push('- Adapta las variables de color y superficie para mantener buen contraste tanto en modo oscuro como en modo claro.');
+    }
+
+    if (fx.authorRepo) {
+      lines.push('- Autor original (' + (fx.authorName || 'repo') + '): ' + fx.authorRepo);
+    }
+
+    if (fx.code && fx.code.html) {
+      lines.push('', 'Estructura HTML base:', fx.code.html);
+    }
+    if (fx.code && fx.code.css) {
+      lines.push('', 'CSS de referencia:', fx.code.css);
+    }
+    if (fx.code && fx.code.js && fx.code.js.indexOf('100% CSS') === -1) {
+      lines.push('', 'Nota JS:', fx.code.js);
+    }
+
+    return lines.filter(Boolean).join('\n');
+  }
+
+  function setupAgentPrompt(fx) {
+    var main = document.querySelector('.effect-main');
+    var codeDrawer = document.querySelector('.code-drawer');
+    if (!main || !fx) return;
+
+    var promptText = buildAgentPrompt(fx);
+    var section = document.createElement('section');
+    section.className = 'prompt-card';
+    section.setAttribute('aria-label', 'Prompt para agente IA');
+
+    section.innerHTML =
+      '<div class="prompt-card__bar">' +
+      '<div class="prompt-card__title-wrap">' +
+      '<h2 class="prompt-card__title">Prompt para agente IA</h2>' +
+      '<span class="prompt-card__sub">Copia este prompt para pedirle a un agente que implemente solo este elemento.</span>' +
+      '</div>' +
+      '<button type="button" id="copy-prompt-btn" class="btn-pill is-primary">Copiar prompt</button>' +
+      '</div>' +
+      '<pre class="prompt-pre" id="agent-prompt-output"></pre>';
+
+    var pre = section.querySelector('#agent-prompt-output');
+    if (pre) pre.textContent = promptText;
+
+    var copyPromptBtn = section.querySelector('#copy-prompt-btn');
+    if (copyPromptBtn) {
+      copyPromptBtn.addEventListener('click', function () {
+        copyToClipboard(promptText, copyPromptBtn, 'Prompt copiado ✓');
+      });
+    }
+
+    if (codeDrawer) {
+      main.insertBefore(section, codeDrawer);
+    } else {
+      main.appendChild(section);
+    }
+  }
+
   function setupCodeDrawer(fx) {
     var pre = document.getElementById('code-output');
     var tabs = document.querySelectorAll('[data-code-tab]');
@@ -458,36 +806,7 @@
 
     if (copyBtn) {
       copyBtn.addEventListener('click', function () {
-        var text = fx.code[currentLang] || '';
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text).then(showCopied, fallbackCopy);
-        } else {
-          fallbackCopy();
-        }
-
-        function fallbackCopy() {
-          var ta = document.createElement('textarea');
-          ta.value = text;
-          ta.style.position = 'fixed';
-          ta.style.opacity = '0';
-          document.body.appendChild(ta);
-          ta.select();
-          try {
-            document.execCommand('copy');
-          } catch (_) {
-            // Ignore
-          }
-          document.body.removeChild(ta);
-          showCopied();
-        }
-
-        function showCopied() {
-          var prev = copyBtn.textContent;
-          copyBtn.textContent = 'Copiado ✓';
-          setTimeout(function () {
-            copyBtn.textContent = prev;
-          }, 1500);
-        }
+        copyToClipboard(fx.code[currentLang] || '', copyBtn, 'Copiado ✓');
       });
     }
 
@@ -546,6 +865,7 @@
     var surfaceBtns = document.querySelectorAll('[data-surface-btn]');
 
     var pager = setupPager(fxIndex);
+    setupAgentPrompt(fx);
     setupCodeDrawer(fx);
     activeController = initEffectEngine(effectId, stage);
 
@@ -598,8 +918,18 @@
     });
 
     document.addEventListener('keydown', function (e) {
-      var tag = (e.target && e.target.tagName) || '';
-      if (tag === 'INPUT' || tag === 'TEXTAREA' || e.metaKey || e.ctrlKey || e.altKey) {
+      var path = e.composedPath ? e.composedPath() : [e.target];
+      var origin = path[0] || e.target;
+      var tag = (origin && origin.tagName) || '';
+      var hostTag = (e.target && e.target.tagName) || '';
+      if (
+        tag === 'INPUT' ||
+        tag === 'TEXTAREA' ||
+        hostTag.indexOf('SAKUGA-') === 0 ||
+        e.metaKey ||
+        e.ctrlKey ||
+        e.altKey
+      ) {
         return;
       }
       if (e.code === 'KeyR' && fx.replayable) {

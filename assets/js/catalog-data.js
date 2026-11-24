@@ -597,6 +597,31 @@
         css: '.st-08-graffvivo { padding: 16px; background: var(--graff-a, #ff3d1f); }\n.st-08-spray-core { filter: url(#st-08-spray-stage); stroke-dasharray: 900; animation: st-08-spray-in 1.4s ease-out both; }',
         js: '// Selector de 3 paletas vivas (Naranja Vivo, Ciber Pop, Calle Neón).'
       }
+    },
+    {
+      number: '09',
+      id: 'estilo-09-sakuga-vfx',
+      slug: '09-sakuga-vfx',
+      category: 'estilos-web',
+      modeLabel: 'Anime UI',
+      name: 'Sakuga VFX',
+      description: 'Controles UI que reaccionan con impactos, chispas, humo y onomatopeyas estilo anime.',
+      tags: ['Web Components', 'Canvas', 'Anime VFX'],
+      authorName: 'Justin Finkelman (@finktheartist)',
+      authorRepo: 'https://github.com/finktheartist/sakuga-vfx/tree/main',
+      continuous: false,
+      replayable: false,
+      path: 'efectos/estilos-web/09-sakuga-vfx.html',
+      hint: 'Prueba cada uno de los 12 controles reales y copia su prompt individual o comando de instalación.',
+      previewHtml:
+        '<div class="st-09-mini"><div class="st-09-mini-burst"><svg class="st-09-mini-star" viewBox="0 0 160 100" aria-hidden="true"><polygon points="80,2 92,30 128,8 112,38 156,42 118,58 144,88 102,70 84,98 70,70 30,92 48,60 6,48 46,38 24,10 64,28" fill="#ffffff" stroke="#5a4fd8" stroke-width="2.5"/><polygon points="80,10 89,34 118,16 104,42 142,46 112,56 132,80 98,64 82,88 70,64 38,82 54,56 18,46 52,40 34,18 68,32" fill="#ff5fa8" opacity="0.32"/></svg><span class="st-09-mini-sfx">ドン!</span><span class="st-09-mini-btn">Confirm</span></div></div>',
+      agentPrompt:
+        'Añade componentes Sakuga VFX a mi proyecto web (repositorio del autor Justin Finkelman: https://github.com/finktheartist/sakuga-vfx/tree/main).\n1. Instala solo el control necesario con `npx shadcn add finktheartist/sakuga-vfx/<componente>` (disponibles: button, toggle, slider, checkbox, radio, input, tabs, progress, rating, toast, tooltip) o copia el archivo `.js` único desde el repositorio.\n2. Cárgalo con una etiqueta `<script src="..."></script>` clásica (sin `type="module"`). No reescribas ni redibujes los efectos manualmente.\n3. Usa su etiqueta custom element (`<sakuga-button>`, `<sakuga-toggle>`, etc.) respetando `prefers-reduced-motion` y personalizando colores mediante variables `--sk-*` (`--sk-ink`, `--sk-card`, `--sk-pri`, `--sk-acc`).\n4. Si solo necesitas un componente concreto, utiliza los botones "Copiar prompt" de cada tarjeta individual en esta página.',
+      code: {
+        html: '<script src="button.js"></script>\n<sakuga-button>Confirm</sakuga-button>\n<sakuga-button variant="secondary">Cancel</sakuga-button>',
+        css: ':root {\n  --sk-ink: #1d1a4a;\n  --sk-pri: #8f8df7;\n  --sk-acc: #ff5fa8;\n  --sk-card: #ffffff;\n}',
+        js: 'const btn = document.querySelector("sakuga-button");\nbtn.addEventListener("click", async () => {\n  await saveAction();\n  btn.done();\n});'
+      }
     }
   ];
 

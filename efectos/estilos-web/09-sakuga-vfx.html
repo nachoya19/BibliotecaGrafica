@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>09. Sakuga VFX — Estilos Web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/effect-page.css">
+  <link rel="stylesheet" href="../../assets/css/effects-styles.css">
+  <script src="../../assets/js/theme.js"></script>
+</head>
+<body data-effect-id="estilo-09-sakuga-vfx">
+  <header class="site-topbar">
+    <div class="container site-topbar__inner">
+      <div class="effect-nav-left">
+        <a class="btn-pill" href="../../index.html">← Catálogo</a>
+        <span class="badge badge-accent">Estilos Web</span>
+      </div>
+      <div class="effect-nav-right">
+        <span id="effect-counter" class="effect-counter">09 / 09</span>
+        <button type="button" id="theme-toggle" class="btn-pill theme-toggle" aria-label="Cambiar tema">
+          <span data-theme-icon aria-hidden="true">☾</span>
+          <span data-theme-label>Oscuro</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container effect-main">
+    <header class="effect-header">
+      <div>
+        <div class="effect-header__meta">
+          <span class="effect-header__num">ESTILO #09</span>
+          <span class="badge">Anime UI</span>
+          <a class="badge badge-accent" href="https://github.com/finktheartist/sakuga-vfx/tree/main" target="_blank" rel="noopener noreferrer">Repo: finktheartist/sakuga-vfx ↗</a>
+        </div>
+        <h1 class="effect-header__title">Sakuga VFX</h1>
+        <p class="effect-header__subtitle">Controles UI que reaccionan con impactos, chispas, humo y onomatopeyas estilo anime.</p>
+      </div>
+      <div class="effect-header__tags">
+        <span class="badge">Web Components</span>
+        <span class="badge">Canvas</span>
+        <span class="badge">MIT · Justin Finkelman</span>
+      </div>
+    </header>
+
+    <section class="stage-card stage-card--overflow-visible" aria-label="Demostración en vivo">
+      <div class="stage-toolbar">
+        <div class="stage-toolbar__group">
+          <button type="button" id="btn-replay" class="btn-pill is-primary" hidden>↻ Repetir</button>
+          <button type="button" id="btn-pause" class="btn-pill" hidden>Pausar</button>
+        </div>
+        <div class="stage-surface-group" role="group" aria-label="Fondo del escenario">
+          <button type="button" class="stage-surface-btn is-active" data-surface-btn="grid">Cuadrícula</button>
+          <button type="button" class="stage-surface-btn" data-surface-btn="dark">Oscuro</button>
+          <button type="button" class="stage-surface-btn" data-surface-btn="light">Claro</button>
+        </div>
+      </div>
+
+      <div id="stage-canvas" class="stage-canvas stage-canvas--overflow-visible" data-surface="grid">
+        <div id="effect-demo">
+          <div class="st-09-sakuga" data-sakuga-gallery>
+            <div class="st-09-banner">
+              <div class="st-09-banner__info">
+                <span class="st-09-banner__title">Sakuga VFX — 12 controles interactivos sin dependencias</span>
+                <span class="st-09-banner__sub">Autor: Justin Finkelman (@finktheartist) · Licencia MIT · Variables personalizables <code class="mono-num">--sk-*</code></span>
+              </div>
+              <a class="st-09-repo-link" href="https://github.com/finktheartist/sakuga-vfx/tree/main" target="_blank" rel="noopener noreferrer">
+                <span>Repositorio del autor en GitHub</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+
+            <div class="st-09-grid">
+              <article class="st-09-item">
+                <div class="st-09-item__head">
+                  <h3>Botón primario</h3>
+                  <span class="st-09-item__tag">&lt;sakuga-button&gt;</span>
+                </div>
+                <p class="st-09-item__how">Haz clic para disparar el impacto y el check final.</p>
+                <div class="st-09-stage">
+                  <sakuga-button data-demo="primary">Confirm</sakuga-button>
+                </div>
+                <p class="st-09-said" aria-live="polite"></p>
+                <div class="st-09-acts">
+                  <button type="button" class="st-09-pill st-09-pill--accent" data-sakuga-prompt="button-primary">Copiar prompt</button>
+                  <button type="button" class="st-09-pill" data-sakuga-install="button">Copiar install</button>
+                </div>
+              </article>
+
+              <article class="st-09-item">
+                <div class="st-09-item__head">
+                  <h3>Botón secundario</h3>
+                  <span class="st-09-item__tag">&lt;sakuga-button&gt;</span>
+                </div>
+                <p class="st-09-item__how">Variante discreta con compresión suave y cuñas.</p>
+                <div class="st-09-stage">
+                  <sakuga-button variant="secondary">Cancel</sakuga-button>
+                </div>
+                <p class="st-09-said" aria-live="polite"></p>
+                <div class="st-09-acts">
+                  <button type="button" class="st-09-pill st-09-pill--accent" data-sakuga-prompt="button-secondary">Copiar prompt</button>
+                  <button type="button" class="st-09-pill" data-sakuga-install="button">Copiar install</button>
+                </div>
+              </article>
+
+              <article class="st-09-item">
+                <div class="st-09-item__head">
+                  <h3>Interruptor</h3>
+                  <span class="st-09-item__tag">&lt;sakuga-toggle&gt;</span>
+                </div>
+                <p class="st-09-item__how">Activa y desactiva para ver los 43 frames pintados.</p>
+                <div class="st-09-stage">
+                  <sakuga-toggle label="Notifications"></sakuga-toggle>
+                </div>
+                <p class="st-09-said" aria-live="polite"></p>
+                <div class="st-09-acts">
+                  <button type="button" class="st-09-pill st-09-pill--accent" data-sakuga-prompt="toggle">Copiar prompt</button>
+                  <button type="button" class="st-09-pill" data-sakuga-install="toggle">Copiar install</button>
+                </div>
+              </article>
+
+              <article class="st-09-item">
+                <div class="st-09-item__head">
+                  <h3>Deslizador</h3>
+                  <span class="st-09-item__tag">&lt;sakuga-slider&gt;</span>
+                </div>
+                <p class="st-09-item__how">Arrastra rápido y suelta en movimiento.</p>
+                <div class="st-09-stage">
+                  <sakuga-slider value="30" label="Volume"></sakuga-slider>
+                </div>
+                <p class="st-09-said" aria-live="polite"></p>
+                <div class="st-09-acts">
+                  <button type="button" class="st-09-pill st-09-pill--accent" data-sakuga-prompt="slider">Copiar prompt</button>
+                  <button type="button" class="st-09-pill" data-sakuga-install="slider">Copiar install</button>
+                </div>
+              </article>
+
+              <article class="st-09-item">
+                <div class="st-09-item__head">
+                  <h3>Casilla de verificación</h3>
+                  <span class="st-09-item__tag">&lt;sakuga-checkbox&gt;</span>
+                </div>
+                <p class="st-09-item__how">Marca la casilla para lanzar cristales y ズザッ.</p>
+                <div class="st-09-stage">
+                  <sakuga-checkbox>Remember me</sakuga-checkbox>
+                </div>
+                <p class="st-09-said" aria-live="polite"></p>
+                <div class="st-09-acts">
+                  <button type="button" class="st-09-pill st-09-pill--accent" data-sakuga-prompt="checkbox">Copiar prompt</button>
+                  <button type="button" class="st-09-pill" data-sakuga-install="checkbox">Copiar install</button>
+                </div>
+              </article>
+
+              <article class="st-09-item">
+                <div class="st-09-item__head">
+                  <h3>Botones de radio</h3>
+                  <span class="st-09-item__tag">&lt;sakuga-radio&gt;</span>
+                </div>
+                <p class="st-09-item__how">Elige la otra opción para disparar el rebote.</p>
+                <div class="st-09-stage">
+                  <sakuga-radio label="Plan">
+                    <option value="a" selected>Option A</option>
+                    <option value="b">Option B</option>
+                  </sakuga-radio>
+                </div>
+                <p class="st-09-said" aria-live="polite"></p>
+                <div class="st-09-acts">
+                  <button type="button" class="st-09-pill st-09-pill--accent" data-sakuga-prompt="radio">Copiar prompt</button>
+                  <button type="button" class="st-09-pill" data-sakuga-install="radio">Copiar install</button>
+                </div>
+              </article>
+
+              <article class="st-09-item">
+                <div class="st-09-item__head">
+                  <h3>Campo de texto</h3>
+                  <span class="st-09-item__tag">&lt;sakuga-input&gt;</span>
+                </div>
+                <p class="st-09-item__how">Escribe dentro para levantar polvo en cada tecla.</p>
+                <div class="st-09-stage">
+                  <sakuga-input label="Text" placeholder="Escribe algo..."></sakuga-input>
+                </div>
+                <p class="st-09-said" aria-live="polite"></p>
+                <div class="st-09-acts">
+                  <button type="button" class="st-09-pill st-09-pill--accent" data-sakuga-prompt="input">Copiar prompt</button>
+                  <button type="button" class="st-09-pill" data-sakuga-install="input">Copiar install</button>
+                </div>
+              </article>
+
+              <article class="st-09-item">
+                <div class="st-09-item__head">
+                  <h3>Pestañas</h3>
+                  <span class="st-09-item__tag">&lt;sakuga-tabs&gt;</span>
+                </div>
+                <p class="st-09-item__how">Cambia de pestaña o usa las flechas del teclado.</p>
+                <div class="st-09-stage">
+                  <sakuga-tabs label="Sections">
+                    <option>Home</option>
+                    <option>Profile</option>
+                    <option>Settings</option>
+                  </sakuga-tabs>
+                </div>
+                <p class="st-09-said" aria-live="polite"></p>
+                <div class="st-09-acts">
+                  <button type="button" class="st-09-pill st-09-pill--accent" data-sakuga-prompt="tabs">Copiar prompt</button>
+                  <button type="button" class="st-09-pill" data-sakuga-install="tabs">Copiar install</button>
+                </div>
+              </article>
+
+              <article class="st-09-item st-09-item--wide">
+                <div class="st-09-item__head">
+                  <h3>Barra de progreso</h3>
+                  <span class="st-09-item__tag">&lt;sakuga-progress&gt;</span>
+                </div>
+                <p class="st-09-item__how">Carga en bucle con nube de tormenta y piedras; haz clic para reiniciar.</p>
+                <div class="st-09-stage">
+                  <sakuga-progress demo label="Loading"></sakuga-progress>
+                </div>
+                <p class="st-09-said" aria-live="polite"></p>
+                <div class="st-09-acts">
+                  <button type="button" class="st-09-pill st-09-pill--accent" data-sakuga-prompt="progress">Copiar prompt</button>
+                  <button type="button" class="st-09-pill" data-sakuga-install="progress">Copiar install</button>
+                </div>
+              </article>
+
+              <article class="st-09-item">
+                <div class="st-09-item__head">
+                  <h3>Valoración</h3>
+                  <span class="st-09-item__tag">&lt;sakuga-rating&gt;</span>
+                </div>
+                <p class="st-09-item__how">Dale cinco estrellas para activar la explosión.</p>
+                <div class="st-09-stage">
+                  <sakuga-rating label="Rating"></sakuga-rating>
+                </div>
+                <p class="st-09-said" aria-live="polite"></p>
+                <div class="st-09-acts">
+                  <button type="button" class="st-09-pill st-09-pill--accent" data-sakuga-prompt="rating">Copiar prompt</button>
+                  <button type="button" class="st-09-pill" data-sakuga-install="rating">Copiar install</button>
+                </div>
+              </article>
+
+              <article class="st-09-item">
+                <div class="st-09-item__head">
+                  <h3>Notificación toast</h3>
+                  <span class="st-09-item__tag">&lt;sakuga-toast&gt;</span>
+                </div>
+                <p class="st-09-item__how">Pulsa Save para lanzar la notificación deslizante.</p>
+                <div class="st-09-stage">
+                  <div class="st-09-toastwrap">
+                    <sakuga-button variant="secondary" data-demo="save">Save</sakuga-button>
+                    <sakuga-toast></sakuga-toast>
+                  </div>
+                </div>
+                <p class="st-09-said" aria-live="polite"></p>
+                <div class="st-09-acts">
+                  <button type="button" class="st-09-pill st-09-pill--accent" data-sakuga-prompt="toast">Copiar prompt</button>
+                  <button type="button" class="st-09-pill" data-sakuga-install="toast">Copiar install</button>
+                </div>
+              </article>
+
+              <article class="st-09-item">
+                <div class="st-09-item__head">
+                  <h3>Tooltip</h3>
+                  <span class="st-09-item__tag">&lt;sakuga-tooltip&gt;</span>
+                </div>
+                <p class="st-09-item__how">Pasa el ratón, enfoca o pulsa sobre la ayuda.</p>
+                <div class="st-09-stage">
+                  <sakuga-tooltip text="Helpful hint!"></sakuga-tooltip>
+                </div>
+                <p class="st-09-said" aria-live="polite"></p>
+                <div class="st-09-acts">
+                  <button type="button" class="st-09-pill st-09-pill--accent" data-sakuga-prompt="tooltip">Copiar prompt</button>
+                  <button type="button" class="st-09-pill" data-sakuga-install="tooltip">Copiar install</button>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-hint">
+        <span>Cada tarjeta incluye su propio botón <strong>Copiar prompt</strong> para pedir solo ese control a un agente.</span>
+        <span>Atajos: <kbd class="kbd">←</kbd> <kbd class="kbd">→</kbd> navegar</span>
+      </div>
+    </section>
+
+    <details class="code-drawer">
+      <summary class="code-drawer__summary">
+        <span>Ver código fuente (HTML / CSS / JS)</span>
+        <span class="code-drawer__chevron" aria-hidden="true">▾</span>
+      </summary>
+      <div class="code-drawer__body">
+        <div class="code-tabs-bar">
+          <div class="code-tabs" role="tablist">
+            <button type="button" class="code-tab is-active" data-code-tab="html">HTML</button>
+            <button type="button" class="code-tab" data-code-tab="css">CSS</button>
+            <button type="button" class="code-tab" data-code-tab="js">JS</button>
+          </div>
+          <button type="button" id="copy-code-btn" class="btn-pill">Copiar código</button>
+        </div>
+        <pre id="code-output" class="code-pre"></pre>
+      </div>
+    </details>
+
+    <nav class="effect-pager" aria-label="Navegación entre estilos">
+      <a id="pager-prev" class="pager-link" href="08-graffiti-vivo.html">
+        <span class="pager-link__dir">← Anterior</span>
+        <span class="pager-link__title">08. Graffiti Vivo</span>
+      </a>
+      <a id="pager-next" class="pager-link pager-link--next" href="01-claymorphism.html">
+        <span class="pager-link__dir">Siguiente →</span>
+        <span class="pager-link__title">01. Claymorphism</span>
+      </a>
+    </nav>
+  </main>
+
+  <script src="../../assets/vendor/sakuga-vfx/button.js"></script>
+  <script src="../../assets/vendor/sakuga-vfx/toggle.js"></script>
+  <script src="../../assets/vendor/sakuga-vfx/slider.js"></script>
+  <script src="../../assets/vendor/sakuga-vfx/checkbox.js"></script>
+  <script src="../../assets/vendor/sakuga-vfx/radio.js"></script>
+  <script src="../../assets/vendor/sakuga-vfx/input.js"></script>
+  <script src="../../assets/vendor/sakuga-vfx/tabs.js"></script>
+  <script src="../../assets/vendor/sakuga-vfx/progress.js"></script>
+  <script src="../../assets/vendor/sakuga-vfx/rating.js"></script>
+  <script src="../../assets/vendor/sakuga-vfx/toast.js"></script>
+  <script src="../../assets/vendor/sakuga-vfx/tooltip.js"></script>
+  <script src="../../assets/js/catalog-data.js"></script>
+  <script src="../../assets/js/effect-page.js"></script>
+</body>
+</html>
